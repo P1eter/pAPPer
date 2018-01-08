@@ -47,9 +47,9 @@ To give robolab-visitors the option to use the pepper robot, I will make an app 
 
 
 ## Prerequisites
-### external components
--Android SDK for Pepper, which is for connection of the tablet to the robot (https://android.aldebaran.com/sdk/doc/pepper-sdk/index.html)connection of tablet to robot.
--Qi SDK for Pepper, which is for triggering motions (like waving), which are provided in the operating system of the robot (called NaoQi) (https://android.aldebaran.com/sdk/doc/pepper-sdk/api.html)
+### External components
+- Android SDK for Pepper, which is for connection of the tablet to the robot (https://android.aldebaran.com/sdk/doc/pepper-sdk/index.html)connection of tablet to robot.
+- Qi SDK for Pepper, which is for triggering motions (like waving), which are provided in the operating system of the robot (called NaoQi) (https://android.aldebaran.com/sdk/doc/pepper-sdk/api.html)
 
 ### Review similar app
 There is one similar app, which is made last year by Caitlin Lagrand. It is an app which is made for the Nao robot. With this app you can connect to a server (via a wifi hotspot, to which the Nao is connected as well). Then you can make the Nao robot walk, turn, speak, dance and take a picture. 
