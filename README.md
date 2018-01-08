@@ -16,7 +16,18 @@ An app that gives the user the option to control the Pepper robot from their pho
 To give robolab-visitors the option to use the pepper robot, I will make an app which allows for easy control and interaction with the Pepper. For a complete experience of the robot, the user can let the robot move location, toggle the so called 'autonomous life' (robot moves a bit and follows faces), show pictures on the tablet, let him say things and execute some standard actions, like vacuuming.
 
 ### Visual Sketch
-# TODO: INSERT VISUAL SKETCH
+<table>
+  <tr>
+    <td>
+      Left part of sketch
+      <img src="doc/ProjectProposal_1.jpg" width="400">
+    </td>
+    <td>
+      Right part of sketch
+      <img src="doc/ProjectProposal_2.jpg" width="400">
+    </td>
+  </tr>
+</table>
 
 ### Main Features
 (It is possible that not all of the planned features make it to the endproduct, depending on whether it is doable to implement these with the SDK, so I made two lists, 'definitely' and 'hopefully')
