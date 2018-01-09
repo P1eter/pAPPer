@@ -33,7 +33,7 @@ To give robolab-visitors the option to use the pepper robot, I will make an app 
 (It is possible that not all of the planned features make it to the endproduct, depending on whether it is doable to implement these with the SDK, so I made two lists, 'definitely' and 'hopefully')
 
 #### Definitely in the endproduct:
-- Connection to the robot
+- Connection to the robot, by letting the user select from a predetermined list of available connections.
 - Letting Pepper speak (text to speech)
 - Telling Pepper to do a (predetermined) motion, like waving
 - Moving Pepper (turn and move)
