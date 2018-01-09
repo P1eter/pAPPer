@@ -33,7 +33,6 @@ This document describes in more detail how the app described in the README.md is
 ## List of APIs, frameworks and plugins
 - Pepper SDK for android
 - Robot SDK and tools (including Qi SDK)
-- 
 
 ## List of data sources
 - Keyframes that are provided with the operating system of the Pepper robot. Keyframes are lists of angle-time combinations, which correspond to a certain joint of the robot. If the joints are at the given points at the given times (interpolating between them), then the robot will perform a certain motion. I use these given keyframes to make the robot for example wave.
