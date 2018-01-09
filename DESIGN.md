@@ -18,11 +18,11 @@ This document describes in more detail how the app described in the README.md is
   </tr>
 
   <tr>
-    <td>getConnections
-    connect
-    sendMove
-    sendTalk
-    sendDance
+    <td>getConnections<br>
+    connect<br>
+    sendMove<br>
+    sendTalk<br>
+    sendDance<br>
     getImage</td>
   </tr>
 </table>
