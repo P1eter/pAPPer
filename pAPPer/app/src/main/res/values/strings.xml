@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">pAPPer</string>
+    <string name="speak_tab">Talk</string>
+    <string name="move_tab">Move</string>
+    <string name="dance_tab">Dance</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">testingngngngng</string>
+</resources>
