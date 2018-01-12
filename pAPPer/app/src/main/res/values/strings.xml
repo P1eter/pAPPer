@@ -6,4 +6,13 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">testingngngngng</string>
+    <string name="talk_button_text">Talk!</string>
+    <string name="talk_edittext_hint">Write anything</string>
+    <string name="options_menu_title">options</string>
+
+    <string-array name="dance_list">
+        <item>Macarena</item>
+        <item>Vacuum</item>
+    </string-array>
+
 </resources>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/options_menuitem"
+        android:icon="?android:attr/homeAsUpIndicator"
+        android:title="@string/options_menu_title"
+        app:showAsAction="always" />
+</menu>

@@ -4,20 +4,23 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
-import com.aldebaran.qi.sdk.QiContext;
-import com.aldebaran.qi.sdk.QiSDK;
-import com.aldebaran.qi.sdk.RobotLifecycleCallbacks;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
+    String[] TABTEXTS = {"Talk", "Walk", "Dance"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        makeTabs();
     }
 
     private void makeTabs() {
@@ -27,11 +30,15 @@ public class MainActivity extends AppCompatActivity {
 //        tabLayout.;
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        ViewPager viewPager = findViewById(R.id.tab_view_pager);
         TabPagerAdapter tabPagerAdapter = new TabPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
-
+        ViewPager viewPager = findViewById(R.id.tab_view_pager);
         viewPager.setAdapter(tabPagerAdapter);
+
         tabLayout.setupWithViewPager(viewPager);
+
+        for (int i = 0; i < tabLayout.getTabCount(); i++) {
+            tabLayout.getTabAt(i).setText(TABTEXTS[i]);
+        }
     }
 
 
@@ -47,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
+            System.out.println("NEXT FRAGMENT");
             switch(position) {
                 case 0:
                     return new TalkFragment();
@@ -65,6 +73,20 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.actions, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
-
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.options_menuitem:
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                RobotSelectFragment fragment = new RobotSelectFragment();
+                fragment.show(ft, "dialog");
+                return true;
+        }
+        return false;
+    }
 }
