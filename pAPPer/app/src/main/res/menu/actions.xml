@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/options_menuitem"
-        android:icon="?android:attr/floatingToolbarOpenDrawable"
+        android:icon="?android:attr/accountPreferences"
         android:title="@string/options_menu_title"
         app:showAsAction="always" />
 </menu>

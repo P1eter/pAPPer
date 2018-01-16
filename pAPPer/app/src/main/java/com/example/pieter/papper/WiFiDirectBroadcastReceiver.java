@@ -4,22 +4,49 @@ package com.example.pieter.papper;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.net.wifi.p2p.WifiP2pDevice;
 import android.net.wifi.p2p.WifiP2pDeviceList;
 import android.net.wifi.p2p.WifiP2pManager;
+import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A BroadcastReceiver that notifies of important Wi-Fi p2p events.
  */
 public class WiFiDirectBroadcastReceiver extends BroadcastReceiver {
-
+    private List<WifiP2pDevice> peers = new ArrayList<>();
     private WifiP2pManager mManager;
     private WifiP2pManager.Channel mChannel;
     private MainActivity mActivity;
     private WifiP2pManager.PeerListListener myPeerListListener = new WifiP2pManager.PeerListListener() {
         @Override
-        public void onPeersAvailable(WifiP2pDeviceList wifiP2pDeviceList) {
+        public void onPeersAvailable(WifiP2pDeviceList peerList) {
             // TODO: USE WIFIP2PDEVICELIST
             // https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pDeviceList.html
+
+//            List<WifiP2pDevice> refreshedPeers = peerList.getDeviceList();
+            if (!peerList.getDeviceList().equals(peers)) {
+                peers.clear();
+                peers.addAll(peerList.getDeviceList());
+
+//                // If an AdapterView is backed by this data, notify it
+//                // of the change. For instance, if you have a ListView of
+//                // available peers, trigger an update.
+//                ((WiFiPeerListAdapter) getListAdapter()).notifyDataSetChanged();
+
+                // Perform any other updates needed based on the new list of
+                // peers connected to the Wi-Fi P2P network.
+            }
+
+            if (peers.size() == 0) {
+//                Log.d(MainActivity.TAG, "No devices found");
+                return;
+            }
+
+
+
         }
     };
 
