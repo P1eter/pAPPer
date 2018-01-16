@@ -16,6 +16,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import static java.lang.Math.min;
+
+
 public class MainActivity extends AppCompatActivity {
     String[] TABTEXTS = {"Talk", "Walk", "Dance"};
     WifiP2pManager mManager;
@@ -40,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
         mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION);
 
         makeTabs();
+
+        searchPeers();
     }
 
     /* register the broadcast receiver with the intent values to be matched */
@@ -80,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
 
         tabLayout.setupWithViewPager(viewPager);
 
-        for (int i = 0; i < tabLayout.getTabCount(); i++) {
+        for (int i = 0; i < min(tabLayout.getTabCount(), TABTEXTS.length); i++) {
             tabLayout.getTabAt(i).setText(TABTEXTS[i]);
         }
     }
