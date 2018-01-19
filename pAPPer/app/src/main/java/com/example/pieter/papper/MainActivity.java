@@ -3,7 +3,11 @@ package com.example.pieter.papper;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.IntentFilter;
+import android.net.nsd.NsdManager;
+import android.net.nsd.NsdServiceInfo;
 import android.net.wifi.p2p.WifiP2pManager;
+import android.net.wifi.p2p.nsd.WifiP2pDnsSdServiceInfo;
+import android.os.AsyncTask;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -12,9 +16,18 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.util.HashMap;
+import java.util.Map;
 
 import static java.lang.Math.min;
 
@@ -25,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private WifiP2pManager.Channel mChannel;
     private BroadcastReceiver mReceiver;
     private IntentFilter mIntentFilter;
+    private int SERVER_PORT = 1717;
 
 
     @Override
@@ -32,48 +46,58 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mManager = (WifiP2pManager) getSystemService(Context.WIFI_P2P_SERVICE);
-        mChannel = mManager.initialize(this, getMainLooper(), null);
-        mReceiver = new WiFiDirectBroadcastReceiver(mManager, mChannel, this);
-
-        mIntentFilter = new IntentFilter();
-        mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION);
-        mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION);
-        mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION);
-        mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION);
+//        mManager = (WifiP2pManager) getSystemService(Context.WIFI_P2P_SERVICE);
+//        mChannel = mManager.initialize(this, getMainLooper(), null);
+//        mReceiver = new WiFiDirectBroadcastReceiver(mManager, mChannel, this);
+//
+//        mIntentFilter = new IntentFilter();
+//        mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION);
+//        mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION);
+//        mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION);
+//        mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION);
 
         makeTabs();
 
-        searchPeers();
+//        startRegistration();
+//
+//        searchPeers();
+
+//        new sendstuffclass().execute();
+
+        initializeDiscoveryListener();
+
+
+        sendstuffclass stuffsender = new sendstuffclass();
+        stuffsender.execute();
     }
 
-    /* register the broadcast receiver with the intent values to be matched */
-    @Override
-    protected void onResume() {
-        super.onResume();
-        registerReceiver(mReceiver, mIntentFilter);
-    }
+//    /* register the broadcast receiver with the intent values to be matched */
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        registerReceiver(mReceiver, mIntentFilter);
+//    }
+//
+//    /* unregister the broadcast receiver */
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
+//        unregisterReceiver(mReceiver);
+//    }
 
-    /* unregister the broadcast receiver */
-    @Override
-    protected void onPause() {
-        super.onPause();
-        unregisterReceiver(mReceiver);
-    }
-
-    void searchPeers() {
-        mManager.discoverPeers(mChannel, new WifiP2pManager.ActionListener() {
-            @Override
-            public void onSuccess() {
-
-            }
-
-            @Override
-            public void onFailure(int reasonCode) {
-
-            }
-        });
-    }
+//    void searchPeers() {
+//        mManager.discoverPeers(mChannel, new WifiP2pManager.ActionListener() {
+//            @Override
+//            public void onSuccess() {
+//
+//            }
+//
+//            @Override
+//            public void onFailure(int reasonCode) {
+//
+//            }
+//        });
+//    }
 
     private void makeTabs() {
         TabLayout tabLayout = findViewById(R.id.tab_layout);
@@ -138,4 +162,159 @@ public class MainActivity extends AppCompatActivity {
         }
         return false;
     }
+
+    private class sendstuffclass extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... voids) {
+            final String host = "localhost";
+            final int portNumber = 1718;
+            System.out.println("Creating socket to '" + host + "' on port " + portNumber);
+
+            while (true) {
+                try {
+                    Socket socket = new Socket(host, portNumber);
+                    BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                    PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+
+//                    System.out.println("server says:" + br.readLine());
+
+//                    BufferedReader userInputBR = new BufferedReader(new InputStreamReader(System.in));
+//                    String userInput = userInputBR.readLine();
+                    String userInput = "OMG ... HET ... WERKT!!!ONE!1";
+                    out.println(userInput);
+
+                    System.out.println("server says:" + br.readLine());
+
+//                    if ("exit".equalsIgnoreCase(userInput)) {
+//                        socket.close();
+//                        break;
+//                    }
+                    break;
+                } catch (IOException e) {
+                    System.out.println("something bad happened, SHIT");
+                    break;
+                }
+            }
+
+            return null;
+        }
+    }
+
+
+    public void initializeDiscoveryListener() {
+
+        // Instantiate a new DiscoveryListener
+        DiscoveryListener mDiscoveryListener = new DiscoveryListener();
+    }
+
+
+
+
+
+
+
+    private class DiscoveryListener implements NsdManager.DiscoveryListener {
+        private static final String TAG = "DiscoveryListener";
+        private NsdManager mNsdManager = (NsdManager) getBaseContext().getSystemService(Context.NSD_SERVICE);
+        private String SERVICE_TYPE = "_test._tcp";
+
+        DiscoveryListener() {
+            mNsdManager.discoverServices(SERVICE_TYPE, NsdManager.PROTOCOL_DNS_SD, this);
+            System.out.println("DiscoveryListener() IS MADE");
+        }
+
+        // Called as soon as service discovery begins.
+        @Override
+        public void onDiscoveryStarted(String regType) {
+            Log.d(TAG, "Service discovery started");
+        }
+
+        @Override
+        public void onServiceFound(NsdServiceInfo service) {
+            System.out.println(service.getHost());
+            System.out.println(service.getPort());
+            System.out.println(service.getServiceName());
+            System.out.println(service.getServiceType());
+            System.out.println(service.toString());
+
+//            // A service was found! Do something with it.
+//            Log.d(TAG, "Service discovery success" + service);
+//            if (!service.getServiceType().equals(SERVICE_TYPE)) {
+//                // Service type is the string containing the protocol and
+//                // transport layer for this service.
+//                Log.d(TAG, "Unknown Service Type: " + service.getServiceType());
+//            } else if (service.getServiceName().equals(mServiceName)) {
+//                // The name of the service tells the user what they'd be
+//                // connecting to. It could be "Bob's Chat App".
+//                Log.d(TAG, "Same machine: " + mServiceName);
+//            } else if (service.getServiceName().contains("NsdChat")){
+//                mNsdManager.resolveService(service, mResolveListener);
+//            }
+        }
+
+        @Override
+        public void onServiceLost(NsdServiceInfo service) {
+            // When the network service is no longer available.
+            // Internal bookkeeping code goes here.
+            Log.e(TAG, "service lost" + service);
+        }
+
+        @Override
+        public void onDiscoveryStopped(String serviceType) {
+            Log.i(TAG, "Discovery stopped: " + serviceType);
+        }
+
+        @Override
+        public void onStartDiscoveryFailed(String serviceType, int errorCode) {
+            Log.e(TAG, "Discovery failed: Error code:" + errorCode);
+            mNsdManager.stopServiceDiscovery(this);
+        }
+
+        @Override
+        public void onStopDiscoveryFailed(String serviceType, int errorCode) {
+            Log.e(TAG, "Discovery failed: Error code:" + errorCode);
+            mNsdManager.stopServiceDiscovery(this);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+//    private void startRegistration() {
+//        //  Create a string map containing information about your service.
+//        Map record = new HashMap();
+//        record.put("listenport", String.valueOf(SERVER_PORT));
+//        record.put("buddyname", "John Doe" + (int) (Math.random() * 1000));
+//        record.put("available", "visible");
+//
+//        // Service information.  Pass it an instance name, service type
+//        // _protocol._transportlayer , and the map containing
+//        // information other devices will want once they connect to this one.
+//        WifiP2pDnsSdServiceInfo serviceInfo =
+//                WifiP2pDnsSdServiceInfo.newInstance("_test", "_presence._tcp", record);
+//
+//        // Add the local service, sending the service info, network channel,
+//        // and listener that will be used to indicate success or failure of
+//        // the request.
+//        mManager.addLocalService(mChannel, serviceInfo, new WifiP2pManager.ActionListener() {
+//            @Override
+//            public void onSuccess() {
+//                System.out.println("ADDED TO SERVICE DISCOVERY");
+//                // Command successful! Code isn't necessarily needed here,
+//                // Unless you want to update the UI or add logging statements.
+//            }
+//
+//            @Override
+//            public void onFailure(int arg0) {
+//                // Command failed.  Check for P2P_UNSUPPORTED, ERROR, or BUSY
+//            }
+//        });
+//    }
+
 }

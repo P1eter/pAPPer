@@ -84,5 +84,6 @@ public class WiFiDirectBroadcastReceiver extends BroadcastReceiver {
         }
     }
 
+
 }
 
