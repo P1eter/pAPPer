@@ -7,5 +7,8 @@ Today I tried to make an app that runs on the tablet of Pepper. I 'robotified' a
 # day 4
 Instead of making two apps that communicate (one phone and one tablet on Pepper), I decided to connect to the Pepper robot directly instead. This is still possible with WiFiDirect (as far as I know at this point). Today I followed tutorials on how sending stuff over the network works, and got a python script that sets up a basic server with a socket that can listen to a specific port. I don't think it can be found by ServiceDiscovery yet, so I have to add that still. The android side can already discover peers, and connect when the right one is found.
 
+# day 5
+Eureka day! Today I managed to get ServiceDiscovery working. With that, I can create a correct socket that binds to the right host and port. With this connection I can now send strings from phone (android) to the server, running in python on the robot. Sadly I had to take the "easy" way out (for now), and drop the idea of WiFiDirect. This connection goes through a hotspot, which takes away the part of connecting the devices in code. I will implement this after the core functionality is added. Furthermore, I can interpret the sent strings on the robot, and let pepper speak. 
 
+[INSERT PICTURES FROM PHONE]
 

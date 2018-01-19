@@ -1,0 +1,22 @@
+My code is based on code snippets from the following information sources:
+
+// basic socket programming in python
+http://www.binarytides.com/python-socket-programming-tutorial/
+
+// how to make a python server
+http://www.binarytides.com/python-socket-server-code-example/
+
+// how to start a thread
+https://docs.oracle.com/javase/tutorial/essential/concurrency/runthread.html
+
+// network service discovery
+https://developer.android.com/training/connect-devices-wirelessly/nsd.html
+
+// how to make a socket connection to a server in java
+http://www.avajava.com/tutorials/lessons/how-do-i-make-a-socket-connection-to-a-server.html
+
+// runnable vs thread
+https://stackoverflow.com/questions/541487/implements-runnable-vs-extends-thread
+
+// naoqi talk interface
+http://doc.aldebaran.com/1-14/dev/python/making_nao_speak.html
