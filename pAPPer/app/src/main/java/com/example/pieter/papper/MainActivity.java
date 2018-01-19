@@ -28,6 +28,8 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.PriorityQueue;
+import java.util.Queue;
 
 import static java.lang.Math.min;
 
@@ -38,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private WifiP2pManager.Channel mChannel;
     private BroadcastReceiver mReceiver;
     private IntentFilter mIntentFilter;
-    private int SERVER_PORT = 1717;
+//    private int SERVER_PORT = 1717;
 
 
     @Override
@@ -67,8 +69,10 @@ public class MainActivity extends AppCompatActivity {
         initializeDiscoveryListener();
 
 
-        NetworkSend networkSend = new NetworkSend();
-        networkSend.execute();
+        NetworkSender networkSender = new NetworkSender();
+        new Thread(networkSender).start();
+
+        networkSender.talk("Hi! My name is Pepper!");
     }
 
 //    /* register the broadcast receiver with the intent values to be matched */
@@ -163,64 +167,50 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
-    private class NetworkSend extends AsyncTask<Void, Void, Void> {
+    private class NetworkSender implements Runnable {
         private Socket socket;
         private BufferedReader in;
         private PrintWriter out;
+        // TODO: make these variables parameters
+        private final int portNumber = 1717;
+        private final String host = "Pepper";
+        private PriorityQueue<String> sendQueue = new PriorityQueue<>();
 
-        public void send(String message) {
+        @Override
+        public void run() {
+            System.out.println("Creating socket to '" + host + "' on port " + portNumber);
+
+            try {
+                socket = new Socket(host, portNumber);
+                in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                out = new PrintWriter(socket.getOutputStream(), true);
+            } catch (IOException e) {
+                // TODO: make this a nice log statement
+                System.out.println("Failed to close connection, with error: " + e);
+            }
+
+            while (true) {
+                if (!sendQueue.isEmpty()) {
+                    send(sendQueue.poll());
+                }
+            }
+        }
+
+        private void send(String message) {
             out.println(message);
         }
 
-        public void close() {
+        public void talk(String statement) {
+            sendQueue.add("say " + statement);
+        }
+
+        private void close() {
             try {
                 socket.close();
             } catch (IOException e) {
                 // TODO: make this a nice log statement
                 System.out.println("Failed to close connection, with error: " + e);
             }
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-            // TODO: make these variables parameters
-            final String host = "Pepper";
-            final int portNumber = 1717;
-            System.out.println("Creating socket to '" + host + "' on port " + portNumber);
-
-            while (true) {
-                try {
-                    socket = new Socket(host, portNumber);
-                    in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                    out = new PrintWriter(socket.getOutputStream(), true);
-
-
-//                    System.out.println("server says:" + br.readLine());
-
-//                    BufferedReader userInputBR = new BufferedReader(new InputStreamReader(System.in));
-//                    String userInput = userInputBR.readLine();
-                    String userInput = "OMG ... HET ... WERKT!!!ONE!1";
-                    send(userInput);
-
-//                    out.println(userInput);
-//
-                    System.out.println("server says:" + in.readLine());
-//
-                    System.out.println("server says:" + in.readLine());
-
-//                    if ("exit".equalsIgnoreCase(userInput)) {
-//                        socket.close();
-//                        break;
-//                    }
-                    break;
-                } catch (IOException e) {
-                    // TODO: make this a log statement with more info :)
-                    System.out.println("something bad happened, SHIT: " + e);
-                    break;
-                }
-            }
-
-            return null;
         }
     }
 
