@@ -67,8 +67,8 @@ public class MainActivity extends AppCompatActivity {
         initializeDiscoveryListener();
 
 
-        sendstuffclass stuffsender = new sendstuffclass();
-        stuffsender.execute();
+        NetworkSend networkSend = new NetworkSend();
+        networkSend.execute();
     }
 
 //    /* register the broadcast receiver with the intent values to be matched */
@@ -163,27 +163,50 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
-    private class sendstuffclass extends AsyncTask<Void, Void, Void> {
+    private class NetworkSend extends AsyncTask<Void, Void, Void> {
+        private Socket socket;
+        private BufferedReader in;
+        private PrintWriter out;
+
+        public void send(String message) {
+            out.println(message);
+        }
+
+        public void close() {
+            try {
+                socket.close();
+            } catch (IOException e) {
+                // TODO: make this a nice log statement
+                System.out.println("Failed to close connection, with error: " + e);
+            }
+        }
+
         @Override
         protected Void doInBackground(Void... voids) {
-            final String host = "localhost";
-            final int portNumber = 1718;
+            // TODO: make these variables parameters
+            final String host = "Pepper";
+            final int portNumber = 1717;
             System.out.println("Creating socket to '" + host + "' on port " + portNumber);
 
             while (true) {
                 try {
-                    Socket socket = new Socket(host, portNumber);
-                    BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                    PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+                    socket = new Socket(host, portNumber);
+                    in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                    out = new PrintWriter(socket.getOutputStream(), true);
+
 
 //                    System.out.println("server says:" + br.readLine());
 
 //                    BufferedReader userInputBR = new BufferedReader(new InputStreamReader(System.in));
 //                    String userInput = userInputBR.readLine();
                     String userInput = "OMG ... HET ... WERKT!!!ONE!1";
-                    out.println(userInput);
+                    send(userInput);
 
-                    System.out.println("server says:" + br.readLine());
+//                    out.println(userInput);
+//
+                    System.out.println("server says:" + in.readLine());
+//
+                    System.out.println("server says:" + in.readLine());
 
 //                    if ("exit".equalsIgnoreCase(userInput)) {
 //                        socket.close();
@@ -191,7 +214,8 @@ public class MainActivity extends AppCompatActivity {
 //                    }
                     break;
                 } catch (IOException e) {
-                    System.out.println("something bad happened, SHIT");
+                    // TODO: make this a log statement with more info :)
+                    System.out.println("something bad happened, SHIT: " + e);
                     break;
                 }
             }
@@ -204,6 +228,7 @@ public class MainActivity extends AppCompatActivity {
     public void initializeDiscoveryListener() {
 
         // Instantiate a new DiscoveryListener
+        System.out.println("made discoverylistener");
         DiscoveryListener mDiscoveryListener = new DiscoveryListener();
     }
 
@@ -216,7 +241,7 @@ public class MainActivity extends AppCompatActivity {
     private class DiscoveryListener implements NsdManager.DiscoveryListener {
         private static final String TAG = "DiscoveryListener";
         private NsdManager mNsdManager = (NsdManager) getBaseContext().getSystemService(Context.NSD_SERVICE);
-        private String SERVICE_TYPE = "_test._tcp";
+        private String SERVICE_TYPE = "_naoqi._tcp";
 
         DiscoveryListener() {
             mNsdManager.discoverServices(SERVICE_TYPE, NsdManager.PROTOCOL_DNS_SD, this);

@@ -4,10 +4,13 @@ package com.example.pieter.papper;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.net.wifi.WpsInfo;
+import android.net.wifi.p2p.WifiP2pConfig;
 import android.net.wifi.p2p.WifiP2pDevice;
 import android.net.wifi.p2p.WifiP2pDeviceList;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +29,9 @@ public class WiFiDirectBroadcastReceiver extends BroadcastReceiver {
             // TODO: USE WIFIP2PDEVICELIST
             // https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pDeviceList.html
             System.out.println("DEVICE LIST TO STRING: " + peerList.toString());
+
+            peers.clear();
+            peers.addAll(peerList.getDeviceList());
 
 ////            List<WifiP2pDevice> refreshedPeers = peerList.getDeviceList();
 //            if (!peerList.getDeviceList().equals(peers)) {
@@ -84,6 +90,27 @@ public class WiFiDirectBroadcastReceiver extends BroadcastReceiver {
         }
     }
 
+    public void connect() {
+        // Picking the first device found on the network.
+        WifiP2pDevice device = peers.get(0);
 
+        WifiP2pConfig config = new WifiP2pConfig();
+        config.deviceAddress = device.deviceAddress;
+        config.wps.setup = WpsInfo.PBC;
+
+        mManager.connect(mChannel, config, new WifiP2pManager.ActionListener() {
+
+            @Override
+            public void onSuccess() {
+                // WiFiDirectBroadcastReceiver notifies us. Ignore for now.
+            }
+
+            @Override
+            public void onFailure(int reason) {
+                Toast.makeText(mActivity, "Connect failed. Retry.",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 }
 
