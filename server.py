@@ -11,6 +11,8 @@ HOST = ''   # Symbolic name meaning all available interfaces
 PORT = 1717 # Arbitrary non-privileged port
  
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.setsockopt(socket.SOL_SOCKET, socket.SO_SNDBUF, 9999)
+s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 print 'Socket created'
  
 #Bind socket to local host and port
@@ -35,10 +37,18 @@ def clientthread(conn):
     while True:
          
         #Receiving from client
-        data = conn.recv(1024)
-        reply = 'OK...' + data
-        if not data: 
+        try:
+            data = conn.recv(1024)
+        except Exception as e:
+            print e
             break
+
+        reply = 'Thanks for the message!: "' + data + '"'
+        if not data:
+            break
+
+        print "I received: ", data
+        print "I replied: ", reply
      
         conn.sendall(reply)
      
