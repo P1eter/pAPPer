@@ -6,9 +6,12 @@
 import socket
 import sys
 from thread import *
+from naoqi import ALProxy
  
 HOST = ''   # Symbolic name meaning all available interfaces
 PORT = 1717 # Arbitrary non-privileged port
+
+tts = ALProxy("ALTextToSpeech", "localhost", 9559)
  
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.setsockopt(socket.SOL_SOCKET, socket.SO_SNDBUF, 9999)
@@ -28,6 +31,10 @@ print 'Socket bind complete'
 s.listen(10)
 print 'Socket now listening'
  
+def handleData(data):
+    if data[:3] == "say":
+        tts.say(data[5:])
+
 #Function for handling connections. This will be used to create threads
 def clientthread(conn):
     #Sending message to connected client
@@ -49,6 +56,8 @@ def clientthread(conn):
 
         print "I received: ", data
         print "I replied: ", reply
+
+        handleData(data)
      
         conn.sendall(reply)
      
