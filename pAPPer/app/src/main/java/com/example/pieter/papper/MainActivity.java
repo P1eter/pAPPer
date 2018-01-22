@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         initializeDiscoveryListener();
 
 
-        networkSender = new NetworkSender();
+        networkSender = NetworkSender.getInstance();
         new Thread(networkSender).start();
 
         networkSender.talk("Hi! My name is Pepper!");

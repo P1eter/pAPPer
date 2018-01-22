@@ -14,6 +14,7 @@ import java.util.PriorityQueue;
  */
 
 public class NetworkSender implements Runnable {
+    private static NetworkSender instance;
     private Socket socket;
     private BufferedReader in;
     private PrintWriter out;
@@ -21,6 +22,18 @@ public class NetworkSender implements Runnable {
     private final int portNumber = 1717;
     private final String host = "Pepper";
     private PriorityQueue<String> sendQueue = new PriorityQueue<>();
+
+    private NetworkSender() {
+        // empty constructor of singleton class
+    }
+
+    public static NetworkSender getInstance() {
+        if (instance == null) {
+            // call the private constructor
+            instance = new NetworkSender();
+        }
+        return instance;
+    }
 
     @Override
     public void run() {
