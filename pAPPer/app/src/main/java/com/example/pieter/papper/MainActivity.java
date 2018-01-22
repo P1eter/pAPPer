@@ -197,7 +197,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
         private void send(String message) {
-            out.println(message);
+            try {
+                out.println(message);
+            } catch (Exception e) {
+                Log.d("NetworkSender", "Cannot send message!", e);
+            }
         }
 
         public void talk(String statement) {
