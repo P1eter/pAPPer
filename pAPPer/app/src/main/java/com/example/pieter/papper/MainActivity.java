@@ -20,6 +20,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -33,14 +34,16 @@ import java.util.Queue;
 
 import static java.lang.Math.min;
 
+//import NetworkSender;
+
 
 public class MainActivity extends AppCompatActivity {
     private String[] TABTEXTS = {"Talk", "Walk", "Dance"};
-    private WifiP2pManager mManager;
-    private WifiP2pManager.Channel mChannel;
-    private BroadcastReceiver mReceiver;
-    private IntentFilter mIntentFilter;
-//    private int SERVER_PORT = 1717;
+//    private WifiP2pManager mManager;
+//    private WifiP2pManager.Channel mChannel;
+//    private BroadcastReceiver mReceiver;
+//    private IntentFilter mIntentFilter;
+    private NetworkSender networkSender;
 
 
     @Override
@@ -69,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         initializeDiscoveryListener();
 
 
-        NetworkSender networkSender = new NetworkSender();
+        networkSender = new NetworkSender();
         new Thread(networkSender).start();
 
         networkSender.talk("Hi! My name is Pepper!");
@@ -119,7 +122,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     // fragmentpager, since FragmentStatePagerAdapter is for more and heavier tabs
     private class TabPagerAdapter extends FragmentPagerAdapter {
         int nTabs;
@@ -166,58 +168,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return false;
     }
-
-    private class NetworkSender implements Runnable {
-        private Socket socket;
-        private BufferedReader in;
-        private PrintWriter out;
-        // TODO: make these variables parameters
-        private final int portNumber = 1717;
-        private final String host = "Pepper";
-        private PriorityQueue<String> sendQueue = new PriorityQueue<>();
-
-        @Override
-        public void run() {
-            System.out.println("Creating socket to '" + host + "' on port " + portNumber);
-
-            try {
-                socket = new Socket(host, portNumber);
-                in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                out = new PrintWriter(socket.getOutputStream(), true);
-            } catch (IOException e) {
-                // TODO: make this a nice log statement
-                System.out.println("Failed to close connection, with error: " + e);
-            }
-
-            while (true) {
-                if (!sendQueue.isEmpty()) {
-                    send(sendQueue.poll());
-                }
-            }
-        }
-
-        private void send(String message) {
-            try {
-                out.println(message);
-            } catch (Exception e) {
-                Log.d("NetworkSender", "Cannot send message!", e);
-            }
-        }
-
-        public void talk(String statement) {
-            sendQueue.add("say " + statement);
-        }
-
-        private void close() {
-            try {
-                socket.close();
-            } catch (IOException e) {
-                // TODO: make this a nice log statement
-                System.out.println("Failed to close connection, with error: " + e);
-            }
-        }
-    }
-
 
     public void initializeDiscoveryListener() {
 
