@@ -66,7 +66,11 @@ public class NetworkSender implements Runnable {
     }
 
     public void talk(String statement) {
-        sendQueue.add("say " + statement);
+        sendQueue.add("talk " + statement);
+    }
+
+    public void move(float x, float y, float theta) {
+        sendQueue.add("move " + x + " " + y + " " + theta);
     }
 
     private void openConnection() {
