@@ -2,6 +2,7 @@ package com.example.pieter.papper;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,8 +17,20 @@ import android.widget.EditText;
 public class TalkFragment extends Fragment implements View.OnClickListener {
     private NetworkSender networkSender = NetworkSender.getInstance();
 
-    public TalkFragment() {
-        // Required empty public constructor
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_talk, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        Button talk_button = view.findViewById(R.id.talk_button);
+        talk_button.setOnClickListener(this);
     }
 
     @Override
@@ -26,15 +39,9 @@ public class TalkFragment extends Fragment implements View.OnClickListener {
             case R.id.talk_button:
                 EditText talk_et = getView().findViewById(R.id.talk_editText);
                 String message = talk_et.getText().toString();
-                networkSender.talk(message);
+                if (!message.isEmpty()){
+                    networkSender.talk(message);
+                }
         }
     }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_talk, container, false);
-    }
-
 }
