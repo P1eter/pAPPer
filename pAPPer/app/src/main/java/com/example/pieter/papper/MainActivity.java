@@ -72,10 +72,10 @@ public class MainActivity extends AppCompatActivity {
         initializeDiscoveryListener();
 
 
-        networkSender = NetworkSender.getInstance();
-        new Thread(networkSender).start();
-
-        networkSender.talk("Hi! My name is Pepper!");
+//        networkSender = NetworkSender.getInstance();
+//        new Thread(networkSender).start();
+//
+//        networkSender.talk("Hi! My name is Pepper!");
     }
 
 //    /* register the broadcast receiver with the intent values to be matched */
@@ -186,6 +186,9 @@ public class MainActivity extends AppCompatActivity {
         private static final String TAG = "DiscoveryListener";
         private NsdManager mNsdManager = (NsdManager) getBaseContext().getSystemService(Context.NSD_SERVICE);
         private String SERVICE_TYPE = "_naoqi._tcp";
+//        private String SERVICE_TYPE = "_http._tcp";
+//        private String SERVICE_TYPE = "";
+
 
         DiscoveryListener() {
             mNsdManager.discoverServices(SERVICE_TYPE, NsdManager.PROTOCOL_DNS_SD, this);
@@ -200,6 +203,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onServiceFound(NsdServiceInfo service) {
+            System.out.println("found a service!");
             System.out.println(service.getHost());
             System.out.println(service.getPort());
             System.out.println(service.getServiceName());

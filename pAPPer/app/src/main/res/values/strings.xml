@@ -10,6 +10,7 @@
     <string name="talk_edittext_hint">Write anything</string>
     <string name="options_menu_title">options</string>
     <string name="talk_fragment_explanation_message">Write your own message, or pick a premade message below!</string>
+    <string name="connect_button_text">Connect</string>
 
     <string-array name="dance_list">
         <item>Macarena</item>

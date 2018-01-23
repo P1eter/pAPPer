@@ -29,8 +29,7 @@ public class TalkFragment extends Fragment implements View.OnClickListener {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Button talk_button = view.findViewById(R.id.talk_button);
-        talk_button.setOnClickListener(this);
+        view.findViewById(R.id.talk_button).setOnClickListener(this);
     }
 
     @Override

@@ -21,13 +21,11 @@ public class NetworkSender implements Runnable {
     private BufferedReader in;
     private PrintWriter out;
     private boolean connectionOpen = false;
-    // TODO: make these variables parameters
-    private final int portNumber = 1717;
-    private final String host = "Pepper";
+    private int port;
+    private String host;
     private PriorityQueue<String> sendQueue = new PriorityQueue<>();
 
     private NetworkSender() {
-        // empty constructor of singleton class
     }
 
     public static NetworkSender getInstance() {
@@ -42,6 +40,15 @@ public class NetworkSender implements Runnable {
     public void run() {
         openConnection();
 
+        System.out.println("NetworkSender: run()");
+        System.out.println(socket.getChannel());
+        System.out.println(socket.getInetAddress());
+        System.out.println(socket.getLocalAddress());
+        System.out.println(socket.getLocalPort());
+        System.out.println(socket.getLocalSocketAddress());
+        System.out.println(socket.getPort());
+        System.out.println(socket.getRemoteSocketAddress());
+
         while (checkConnection()) {
             if (!sendQueue.isEmpty()) {
                 Log.d(TAG, "Sending: " + sendQueue.peek());
@@ -51,14 +58,10 @@ public class NetworkSender implements Runnable {
     }
 
     private void send(String message) {
-//        out.println()
-//        out.println(message);
-//        out.write(message);
-//        out.che
-
         try {
             Log.d(TAG, "1");
             out.write(message);
+            out.flush();
             Log.d(TAG, "2");
         } catch (Exception e) {
             Log.d(TAG, "Cannot send message!", e);
@@ -74,15 +77,15 @@ public class NetworkSender implements Runnable {
     }
 
     private void openConnection() {
-        System.out.println("Creating socket to '" + host + "' on port " + portNumber);
+        System.out.println("Creating socket to '" + host + "' on port " + port);
 
         try {
-            socket = new Socket(host, portNumber);
+            socket = new Socket(host, port);
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             out = new PrintWriter(socket.getOutputStream(), true);
             connectionOpen = true;
         } catch (IOException e) {
-            Log.e(TAG, "Failed to close connection", e);
+            Log.e(TAG, "Failed to open connection", e);
             connectionOpen = false;
         }
     }
@@ -107,11 +110,11 @@ public class NetworkSender implements Runnable {
     }
 
     private boolean checkConnection() {
-        if (connectionOpen) {
-            getMessages();
-        } else {
-            return false;
-        }
+//        if (connectionOpen) {
+//            getMessages();
+//        } else {
+//            return false;
+//        }
         return true;
 
 //        try {
@@ -138,5 +141,13 @@ public class NetworkSender implements Runnable {
 //            return false;
 //        }
 
+    }
+
+    public void setPort(int port) {
+        this.port = port;
+    }
+
+    public void setHost(String host) {
+        this.host = host;
     }
 }
