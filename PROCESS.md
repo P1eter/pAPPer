@@ -18,3 +18,6 @@ In the weekend I fixed the icon of my app and added some very basic design. I al
 # day 6
 Today I connected the talk fragment in the app to the back-end. The user can now type anything and let the robot say it. I also improved connection stability, and fixed bugs regarding the different cycle frequencies of the server and the client.
 
+# day 7
+Today I connected the movement and connection tabs to the back-end, made an attempt (WIP) to make the connection between the phone and the robot more stable and made a changed version of the server, so I can test things without a robot. I had trouble figuring out what the socket protocol is when the server runs on my laptop, since I could not set it on the server and there was barely any information on this specific topic. To solve this, I posted a question on stackoverflow, but nobody responded yet. 
+
