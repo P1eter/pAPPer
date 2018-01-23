@@ -12,3 +12,9 @@ Eureka day! Today I managed to get ServiceDiscovery working. With that, I can cr
 
 [INSERT PICTURES FROM PHONE]
 
+# weekend
+In the weekend I fixed the icon of my app and added some very basic design. I also fixed numerous bugs in the connection.
+
+# day 6
+Today I connected the talk fragment in the app to the back-end. The user can now type anything and let the robot say it. I also improved connection stability, and fixed bugs regarding the different cycle frequencies of the server and the client.
+
