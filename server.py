@@ -28,12 +28,19 @@ except socket.error as msg:
 print 'Socket bind complete'
  
 #Start listening on socket
-s.listen(10)
+s.listen(1)
 print 'Socket now listening'
  
-def handleData(data):
-    if data[:3] == "say":
-        tts.say(data[5:])
+def handleData(data_string):
+    if data_string[:4] == "talk":
+        tts.say(data_string[6:])
+
+def preprocessData(data_string):
+    # only execute the first command that was sent
+    return data_string.split('\n')[0]
+
+def sendBit():
+    s.send(b'1')
 
 #Function for handling connections. This will be used to create threads
 def clientthread(conn):
@@ -42,24 +49,21 @@ def clientthread(conn):
      
     #infinite loop so that function do not terminate and thread do not end.
     while True:
-         
         #Receiving from client
         try:
-            data = conn.recv(1024)
+            data_string = conn.recv(1024)
         except Exception as e:
             print e
             break
 
-        reply = 'Thanks for the message!: "' + data + '"'
-        if not data:
-            break
+        print "I received: ", data_string
 
-        print "I received: ", data
-        print "I replied: ", reply
+        data_string = preprocessData(data_string)
+        handleData(data_string)
 
-        handleData(data)
+        sendBit();
      
-        conn.sendall(reply)
+        # conn.sendall(reply)
      
     #came out of loop
     conn.close()

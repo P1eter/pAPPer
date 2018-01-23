@@ -29,34 +29,37 @@ s.listen(10)
 print 'Socket now listening'
  
 def handleData(data):
-    if data[:3] == "say":
-        print data[5:]
+    if data[:4] == "talk":
+        print data
+    if data[:4] == "move":
+        print data
 
 #Function for handling connections. This will be used to create threads
 def clientthread(conn):
     #Sending message to connected client
-    conn.send('Welcome to the server. Type something and hit enter\n') #send only takes string
+    conn.send('Welcome to the server.\n') #send only takes string
      
     #infinite loop so that function do not terminate and thread do not end.
     while True:
          
         #Receiving from client
         try:
+            print "receiving..."
             data = conn.recv(1024)
+            print "received"
         except Exception as e:
             print e
             break
 
-        reply = 'Thanks for the message!: "' + data + '"'
+        # reply = 'Thanks for the message!: "' + data + '"'
         if not data:
             break
 
         print "I received: ", data
-        print "I replied: ", reply
 
         handleData(data)
      
-        conn.sendall(reply)
+        # conn.sendall(reply)
      
     #came out of loop
     conn.close()

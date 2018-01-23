@@ -5,6 +5,7 @@ http://www.binarytides.com/python-socket-programming-tutorial/
 
 // how to make a python server
 http://www.binarytides.com/python-socket-server-code-example/
+https://www.thoughtco.com/building-a-simple-web-server-2813571
 
 // how to start a thread
 https://docs.oracle.com/javase/tutorial/essential/concurrency/runthread.html
