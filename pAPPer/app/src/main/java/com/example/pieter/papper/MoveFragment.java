@@ -2,10 +2,12 @@ package com.example.pieter.papper;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 
 /**
@@ -23,6 +25,16 @@ public class MoveFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_move, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        view.findViewById(R.id.up_imagebutton).setOnClickListener(this);
+        view.findViewById(R.id.down_imagebutton).setOnClickListener(this);
+        view.findViewById(R.id.left_imagebutton).setOnClickListener(this);
+        view.findViewById(R.id.right_imagebutton).setOnClickListener(this);
     }
 
     @Override
