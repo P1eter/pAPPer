@@ -92,6 +92,10 @@ public class NetworkSender implements Runnable {
         sendQueue.add("move " + x + " " + y + " " + theta);
     }
 
+    public void wakeUp(boolean wakeOrSleep) {
+        sendQueue.add("wake " + (wakeOrSleep ? 1 : 0));
+    }
+
     public boolean openConnection() {
         System.out.println("Creating socket to '" + host + "' on port " + port);
 
@@ -104,6 +108,7 @@ public class NetworkSender implements Runnable {
             socket = new Socket(host, port);
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             out = new PrintWriter(socket.getOutputStream(), true);
+            sendQueue.clear();
             connectionOpen = true;
         } catch (IOException e) {
             // TODO: make toast

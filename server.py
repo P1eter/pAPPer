@@ -34,9 +34,18 @@ print 'Socket now listening'
  
 def handleData(data_string):
     if data_string[:4] == "talk":
-        tts.say(data_string[6:])
-    if data_string[:4] == "move":
-        print "moving:", data_string[6:]
+        tts.say(data_string[5:])
+    elif data_string[:4] == "move":
+        x, y, theta = data_string[5:].split(" ")
+        # print(split_move_command)
+        if not move.robotIsWakeUp():
+            print "waking Pepper up"
+            move.wakeUp()
+        else:
+            move.moveToward(float(x), float(y), float(theta))
+        print "moving:", data_string[5:]
+    elif data_string[:4] == "wake":
+        move.wakeUp() if data_string[5] == "1" else move.rest()
 
 def preprocessData(data_string):
     # only execute the first command that was sent
@@ -54,6 +63,7 @@ def handleClient(conn):
     while True:
         #Receiving from client
         try:
+            print "receiving..."
             data_string = conn.recv(1024)
         except Exception as e:
             print e

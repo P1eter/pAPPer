@@ -9,9 +9,10 @@
 
 
     <GridLayout
+        android:id="@+id/gridLayout"
         android:layout_width="334dp"
         android:layout_height="332dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="52dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -21,8 +22,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.392">
+        app:layout_constraintTop_toBottomOf="@+id/stiffness_onoff_togglebutton"
+        app:layout_constraintVertical_bias="0.481">
 
         <ImageButton
             android:id="@+id/left_imagebutton"
@@ -56,5 +57,26 @@
             android:layout_row="1"
             android:background="@drawable/right_arrow_small" />
 
+        <ImageButton
+            android:id="@+id/stop_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="1"
+            android:layout_row="1"
+            android:background="@drawable/papper_icon_small" />
+
     </GridLayout>
+
+    <ToggleButton
+        android:id="@+id/stiffness_onoff_togglebutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="36dp"
+        android:textOff="resting"
+        android:textOn="activated"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>
