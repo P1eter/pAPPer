@@ -21,3 +21,5 @@ Today I connected the talk fragment in the app to the back-end. The user can now
 # day 7
 Today I connected the movement and connection tabs to the back-end, made an attempt (WIP) to make the connection between the phone and the robot more stable and made a changed version of the server, so I can test things without a robot. I had trouble figuring out what the socket protocol is when the server runs on my laptop, since I could not set it on the server and there was barely any information on this specific topic. To solve this, I posted a question on stackoverflow, but nobody responded yet. 
 
+# day 8
+Today I found some major issues with the connection. The app would crash on a reconnect with the robot, and the server would receive a lot of messages from unknown source. Little debug information was available, but I think the issues are fixed now. Furthermore, I connected the move fragment to the backend, so now the robot can move. I also added a toggle button to wake up the robot and let it go to sleep.
