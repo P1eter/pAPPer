@@ -7,8 +7,11 @@ import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.ConnectException;
 import java.net.Socket;
 import java.util.PriorityQueue;
+
+import static java.lang.Thread.sleep;
 
 /**
  * Created by pkronemeijer on 22-1-18.
@@ -38,7 +41,9 @@ public class NetworkSender implements Runnable {
 
     @Override
     public void run() {
-        openConnection();
+        if (!openConnection()) {
+            return;
+        }
 
         System.out.println("NetworkSender: run()");
         System.out.println(socket.getChannel());
@@ -53,17 +58,28 @@ public class NetworkSender implements Runnable {
             if (!sendQueue.isEmpty()) {
                 Log.d(TAG, "Sending: " + sendQueue.peek());
                 send(sendQueue.poll());
+
+                try {
+                    sleep(2);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
+        }
+
+        if (connectionOpen) {
+            closeConnection();
         }
     }
 
     private void send(String message) {
+        Log.d(TAG, "sending... \"" + message + "\"");
         try {
             Log.d(TAG, "1");
-            out.write(message);
+            out.write(message + "\n");
             out.flush();
             Log.d(TAG, "2");
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             Log.d(TAG, "Cannot send message!", e);
         }
     }
@@ -76,8 +92,13 @@ public class NetworkSender implements Runnable {
         sendQueue.add("move " + x + " " + y + " " + theta);
     }
 
-    private void openConnection() {
+    public boolean openConnection() {
         System.out.println("Creating socket to '" + host + "' on port " + port);
+
+        if (connectionOpen && !closeConnection()) {
+//            connectionOpen = true;
+            return false;
+        }
 
         try {
             socket = new Socket(host, port);
@@ -85,37 +106,86 @@ public class NetworkSender implements Runnable {
             out = new PrintWriter(socket.getOutputStream(), true);
             connectionOpen = true;
         } catch (IOException e) {
+            // TODO: make toast
             Log.e(TAG, "Failed to open connection", e);
-            connectionOpen = false;
+            return false;
         }
+        Log.d(TAG, "Opened connection");
+        return true;
     }
 
-    private void closeConnection() {
+    public boolean closeConnection() {
         try {
-            Log.i(TAG, "Host closed connection, disconnecting...");
             socket.close();
+            Log.i(TAG, "Host closed connection, disconnecting...");
+            sendQueue.clear();
+
+            socket = null;
+            in = null;
+            out = null;
             connectionOpen = false;
+            return true;
         } catch (IOException e) {
-            Log.e(TAG, "Failed to close socket, with error: ", e);
+            Log.e(TAG, "Failed to close socket", e);
+//            connectionOpen = true;
+            return false;
         }
     }
 
     private void getMessages() {
         try {
-            String data = in.readLine();
-            Log.d(TAG, data);
+//            Log.d(TAG, "Waiting for response...");
+//            String data = in.readLine();
+//            Log.d(TAG, data);
+            if (in.ready() && in.readLine() == null) {
+                Log.d(TAG, "response: null");
+//                connectionOpen = false;
+            }
         } catch (IOException e) {
+//            connectionOpen = false;
+            e.printStackTrace();
+        } catch (NullPointerException e) {
+//            connectionOpen = false;
             e.printStackTrace();
         }
     }
 
     private boolean checkConnection() {
+        try {
+            if (connectionOpen && in.ready() && in.readLine() == null) {
+                Log.d(TAG, "response: null");
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+
+//        catch (IOException e) {
+//            e.printStackTrace();
+//        } catch (NullPointerException e) {
+//            e.printStackTrace();
+//        }
+
 //        if (connectionOpen) {
-//            getMessages();
+////            getMessages();
+//            try {
+//                if (in.ready() && in.readLine() == null) {
+//                    Log.d(TAG, "response: null");
+//                    connectionOpen = false;
+//                }
+//            } catch (IOException e) {
+//                connectionOpen = false;
+//                e.printStackTrace();
+//            } catch (NullPointerException e) {
+//                connectionOpen = false;
+//                e.printStackTrace();
+//            }
 //        } else {
 //            return false;
 //        }
-        return true;
+//        return true;
 
 //        try {
 //            Log.d(TAG, "1");
@@ -149,5 +219,9 @@ public class NetworkSender implements Runnable {
 
     public void setHost(String host) {
         this.host = host;
+    }
+
+    public boolean isRunning() {
+        return connectionOpen;
     }
 }
