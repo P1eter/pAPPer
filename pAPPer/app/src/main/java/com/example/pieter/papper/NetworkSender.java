@@ -96,6 +96,10 @@ public class NetworkSender implements Runnable {
         sendQueue.add("wake " + (wakeOrSleep ? 1 : 0));
     }
 
+    public void dance(String dance) {
+        sendQueue.add("danc " + dance);
+    }
+
     public boolean openConnection() {
         System.out.println("Creating socket to '" + host + "' on port " + port);
 
