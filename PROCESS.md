@@ -23,3 +23,6 @@ Today I connected the movement and connection tabs to the back-end, made an atte
 
 # day 8
 Today I found some major issues with the connection. The app would crash on a reconnect with the robot, and the server would receive a lot of messages from unknown source. Little debug information was available, but I think the issues are fixed now. Furthermore, I connected the move fragment to the backend, so now the robot can move. I also added a toggle button to wake up the robot and let it go to sleep.
+
+# day 9
+I implemented a disconnect button, connected dances to the backend, created files of joint interpolation data that the robot can execute, created different colored icons for showing the connection and I implemented an interface for a callback from the network thread to the mainactivity to change the color of the icon. This last bit is a bit of a WIP, since apparently a callback function in the mainactivity throws a `CalledFromWrongThreadException`.
