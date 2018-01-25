@@ -16,6 +16,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -43,13 +44,18 @@ public class MainActivity extends AppCompatActivity {
 //    private WifiP2pManager.Channel mChannel;
 //    private BroadcastReceiver mReceiver;
 //    private IntentFilter mIntentFilter;
-    private NetworkSender networkSender;
+    private NetworkSender networkSender = NetworkSender.getInstance();
+    private Toolbar toolbar;
+    private MenuItem connectIcon;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        toolbar = findViewById(R.id.tool_bar);
+        setSupportActionBar(toolbar);
 
 //        mManager = (WifiP2pManager) getSystemService(Context.WIFI_P2P_SERVICE);
 //        mChannel = mManager.initialize(this, getMainLooper(), null);
@@ -155,6 +161,8 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.actions, menu);
+        connectIcon = menu.findItem(R.id.options_menuitem);
+//        networkSender.setMenuItem(connectIcon);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -176,19 +184,10 @@ public class MainActivity extends AppCompatActivity {
         DiscoveryListener mDiscoveryListener = new DiscoveryListener();
     }
 
-
-
-
-
-
-
     private class DiscoveryListener implements NsdManager.DiscoveryListener {
         private static final String TAG = "DiscoveryListener";
         private NsdManager mNsdManager = (NsdManager) getBaseContext().getSystemService(Context.NSD_SERVICE);
         private String SERVICE_TYPE = "_naoqi._tcp";
-//        private String SERVICE_TYPE = "_http._tcp";
-//        private String SERVICE_TYPE = "";
-
 
         DiscoveryListener() {
             mNsdManager.discoverServices(SERVICE_TYPE, NsdManager.PROTOCOL_DNS_SD, this);

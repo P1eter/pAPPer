@@ -1,6 +1,8 @@
 package com.example.pieter.papper;
 
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import java.io.BufferedReader;
 import java.io.EOFException;
