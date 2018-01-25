@@ -7,8 +7,11 @@ import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.ConnectException;
 import java.net.Socket;
 import java.util.PriorityQueue;
+
+import static java.lang.Thread.sleep;
 
 /**
  * Created by pkronemeijer on 22-1-18.
@@ -21,13 +24,11 @@ public class NetworkSender implements Runnable {
     private BufferedReader in;
     private PrintWriter out;
     private boolean connectionOpen = false;
-    // TODO: make these variables parameters
-    private final int portNumber = 1717;
-    private final String host = "Pepper";
+    private int port;
+    private String host;
     private PriorityQueue<String> sendQueue = new PriorityQueue<>();
 
     private NetworkSender() {
-        // empty constructor of singleton class
     }
 
     public static NetworkSender getInstance() {
@@ -40,27 +41,45 @@ public class NetworkSender implements Runnable {
 
     @Override
     public void run() {
-        openConnection();
+        if (!openConnection()) {
+            return;
+        }
+
+        System.out.println("NetworkSender: run()");
+        System.out.println(socket.getChannel());
+        System.out.println(socket.getInetAddress());
+        System.out.println(socket.getLocalAddress());
+        System.out.println(socket.getLocalPort());
+        System.out.println(socket.getLocalSocketAddress());
+        System.out.println(socket.getPort());
+        System.out.println(socket.getRemoteSocketAddress());
 
         while (checkConnection()) {
             if (!sendQueue.isEmpty()) {
                 Log.d(TAG, "Sending: " + sendQueue.peek());
                 send(sendQueue.poll());
+
+                try {
+                    sleep(2);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
+        }
+
+        if (connectionOpen) {
+            closeConnection();
         }
     }
 
     private void send(String message) {
-//        out.println()
-//        out.println(message);
-//        out.write(message);
-//        out.che
-
+        Log.d(TAG, "sending... \"" + message + "\"");
         try {
             Log.d(TAG, "1");
-            out.write(message);
+            out.write(message + "\n");
+            out.flush();
             Log.d(TAG, "2");
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             Log.d(TAG, "Cannot send message!", e);
         }
     }
@@ -73,46 +92,105 @@ public class NetworkSender implements Runnable {
         sendQueue.add("move " + x + " " + y + " " + theta);
     }
 
-    private void openConnection() {
-        System.out.println("Creating socket to '" + host + "' on port " + portNumber);
-
-        try {
-            socket = new Socket(host, portNumber);
-            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            out = new PrintWriter(socket.getOutputStream(), true);
-            connectionOpen = true;
-        } catch (IOException e) {
-            Log.e(TAG, "Failed to close connection", e);
-            connectionOpen = false;
-        }
+    public void wakeUp(boolean wakeOrSleep) {
+        sendQueue.add("wake " + (wakeOrSleep ? 1 : 0));
     }
 
-    private void closeConnection() {
+    public boolean openConnection() {
+        System.out.println("Creating socket to '" + host + "' on port " + port);
+
+        if (connectionOpen && !closeConnection()) {
+//            connectionOpen = true;
+            return false;
+        }
+
         try {
-            Log.i(TAG, "Host closed connection, disconnecting...");
-            socket.close();
-            connectionOpen = false;
+            socket = new Socket(host, port);
+            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            out = new PrintWriter(socket.getOutputStream(), true);
+            sendQueue.clear();
+            connectionOpen = true;
         } catch (IOException e) {
-            Log.e(TAG, "Failed to close socket, with error: ", e);
+            // TODO: make toast
+            Log.e(TAG, "Failed to open connection", e);
+            return false;
+        }
+        Log.d(TAG, "Opened connection");
+        return true;
+    }
+
+    public boolean closeConnection() {
+        try {
+            socket.close();
+            Log.i(TAG, "Host closed connection, disconnecting...");
+            sendQueue.clear();
+
+            socket = null;
+            in = null;
+            out = null;
+            connectionOpen = false;
+            return true;
+        } catch (IOException e) {
+            Log.e(TAG, "Failed to close socket", e);
+//            connectionOpen = true;
+            return false;
         }
     }
 
     private void getMessages() {
         try {
-            String data = in.readLine();
-            Log.d(TAG, data);
+//            Log.d(TAG, "Waiting for response...");
+//            String data = in.readLine();
+//            Log.d(TAG, data);
+            if (in.ready() && in.readLine() == null) {
+                Log.d(TAG, "response: null");
+//                connectionOpen = false;
+            }
         } catch (IOException e) {
+//            connectionOpen = false;
+            e.printStackTrace();
+        } catch (NullPointerException e) {
+//            connectionOpen = false;
             e.printStackTrace();
         }
     }
 
     private boolean checkConnection() {
-        if (connectionOpen) {
-            getMessages();
-        } else {
+        try {
+            if (connectionOpen && in.ready() && in.readLine() == null) {
+                Log.d(TAG, "response: null");
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
         return true;
+
+//        catch (IOException e) {
+//            e.printStackTrace();
+//        } catch (NullPointerException e) {
+//            e.printStackTrace();
+//        }
+
+//        if (connectionOpen) {
+////            getMessages();
+//            try {
+//                if (in.ready() && in.readLine() == null) {
+//                    Log.d(TAG, "response: null");
+//                    connectionOpen = false;
+//                }
+//            } catch (IOException e) {
+//                connectionOpen = false;
+//                e.printStackTrace();
+//            } catch (NullPointerException e) {
+//                connectionOpen = false;
+//                e.printStackTrace();
+//            }
+//        } else {
+//            return false;
+//        }
+//        return true;
 
 //        try {
 //            Log.d(TAG, "1");
@@ -138,5 +216,17 @@ public class NetworkSender implements Runnable {
 //            return false;
 //        }
 
+    }
+
+    public void setPort(int port) {
+        this.port = port;
+    }
+
+    public void setHost(String host) {
+        this.host = host;
+    }
+
+    public boolean isRunning() {
+        return connectionOpen;
     }
 }

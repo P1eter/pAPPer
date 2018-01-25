@@ -28,7 +28,7 @@
     <EditText
         android:id="@+id/talk_editText"
         android:layout_width="320dp"
-        android:layout_height="87dp"
+        android:layout_height="47dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="36dp"
