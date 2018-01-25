@@ -38,7 +38,7 @@ import static java.lang.Math.min;
 //import NetworkSender;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnConnectionChangedListener {
     private String[] TABTEXTS = {"Talk", "Walk", "Dance"};
 //    private WifiP2pManager mManager;
 //    private WifiP2pManager.Channel mChannel;
@@ -112,6 +112,31 @@ public class MainActivity extends AppCompatActivity {
 //        });
 //    }
 
+
+    @Override
+    public void onConnectionChanged(boolean connected) {
+//        if (connected) {
+//            connectIcon.setIcon(R.drawable.connect_symbol_green);
+//        } else {
+//            connectIcon.setIcon(R.drawable.connect_symbol_red);
+//        }
+        if (connected) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    connectIcon.setIcon(R.drawable.connect_symbol_green);
+                }
+            });
+        } else {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    connectIcon.setIcon(R.drawable.connect_symbol_red);
+                }
+            });
+        }
+    }
+
     private void makeTabs() {
         TabLayout tabLayout = findViewById(R.id.tab_layout);
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
@@ -162,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.actions, menu);
         connectIcon = menu.findItem(R.id.options_menuitem);
-//        networkSender.setMenuItem(connectIcon);
+        networkSender.setCallback(this);
         return super.onCreateOptionsMenu(menu);
     }
 

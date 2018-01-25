@@ -29,6 +29,7 @@ public class NetworkSender implements Runnable {
     private int port;
     private String host;
     private PriorityQueue<String> sendQueue = new PriorityQueue<>();
+    private OnConnectionChangedListener onConnectionChangedListener;
 
     private NetworkSender() {
     }
@@ -116,6 +117,7 @@ public class NetworkSender implements Runnable {
             out = new PrintWriter(socket.getOutputStream(), true);
             sendQueue.clear();
             connectionOpen = true;
+            onConnectionChangedListener.onConnectionChanged(true);
         } catch (IOException e) {
             // TODO: make toast
             Log.e(TAG, "Failed to open connection", e);
@@ -135,6 +137,7 @@ public class NetworkSender implements Runnable {
             in = null;
             out = null;
             connectionOpen = false;
+            onConnectionChangedListener.onConnectionChanged(false);
             return true;
         } catch (IOException e) {
             Log.e(TAG, "Failed to close socket", e);
@@ -230,6 +233,10 @@ public class NetworkSender implements Runnable {
 
     public void setHost(String host) {
         this.host = host;
+    }
+
+    public void setCallback(OnConnectionChangedListener c) {
+        this.onConnectionChangedListener = c;
     }
 
     public boolean isRunning() {
