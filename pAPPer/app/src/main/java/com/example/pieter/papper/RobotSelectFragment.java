@@ -30,6 +30,7 @@ public class RobotSelectFragment extends DialogFragment implements View.OnClickL
         super.onViewCreated(view, savedInstanceState);
 
         view.findViewById(R.id.connect_button).setOnClickListener(this);
+        view.findViewById(R.id.disconnect_button).setOnClickListener(this);
     }
 
     @Override
@@ -40,9 +41,18 @@ public class RobotSelectFragment extends DialogFragment implements View.OnClickL
             networkSender.closeConnection();
         }
 
-        networkSender.setHost("Pepper"); //192.168.0.103 = laptop
-        networkSender.setPort(1717);
-        new Thread(networkSender).start();
+        switch (view.getId()) {
+            case R.id.connect_button:
+                networkSender.setHost("Pepper"); //192.168.0.103 = laptop
+                networkSender.setPort(1717);
+                new Thread(networkSender).start();
+                break;
+            case R.id.disconnect_button:
+                // disconnection already happened
+                break;
+        }
+
+
 
 //        if (!networkSender.isRunning()) {
 //            Log.d(TAG, "starting new thread");
