@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
 
 /**
@@ -30,6 +32,26 @@ public class TalkFragment extends Fragment implements View.OnClickListener {
         super.onViewCreated(view, savedInstanceState);
 
         view.findViewById(R.id.talk_button).setOnClickListener(this);
+        SeekBar volume_seekbar = view.findViewById(R.id.volume_seekBar);
+        volume_seekbar.setOnSeekBarChangeListener(new SeekBarChangedListener());
+    }
+
+    private class SeekBarChangedListener implements SeekBar.OnSeekBarChangeListener {
+        @Override
+        public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+            TextView volume_textview = getView().findViewById(R.id.volume_textview);
+            volume_textview.setText("Volume: " +  String.valueOf(i));
+        }
+
+        @Override
+        public void onStartTrackingTouch(SeekBar seekBar) {
+
+        }
+
+        @Override
+        public void onStopTrackingTouch(SeekBar seekBar) {
+
+        }
     }
 
     @Override
@@ -38,8 +60,12 @@ public class TalkFragment extends Fragment implements View.OnClickListener {
             case R.id.talk_button:
                 EditText talk_et = getView().findViewById(R.id.talk_editText);
                 String message = talk_et.getText().toString();
+
+                SeekBar volume_seekbar = getView().findViewById(R.id.volume_seekBar);
+                String volume = String.valueOf(volume_seekbar.getProgress());
+
                 if (!message.isEmpty()){
-                    networkSender.talk(message);
+                    networkSender.talk(volume + message);
                 }
         }
     }
