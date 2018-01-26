@@ -26,3 +26,7 @@ Today I found some major issues with the connection. The app would crash on a re
 
 # day 9
 I implemented a disconnect button, connected dances to the backend, created files of joint interpolation data that the robot can execute, created different colored icons for showing the connection and I implemented an interface for a callback from the network thread to the mainactivity to change the color of the icon. This last bit is a bit of a WIP, since apparently a callback function in the mainactivity throws a `CalledFromWrongThreadException`.
+
+# day 10
+Today I tried to use Peppers tablet to show a picture that the robot takes, but apparently there is a bug in the software (recognized by Softbank developers) which makes the tablet unusable. There is no known fix for this (as far as I could find). Besides that, I upgraded the overall usability of the app. I made the connect fragment disappear on connect/disconnect, added another dance, put a class in its on file, added a seekBar for volume setting, set the drop down menu to display available connections and updated some design things. 
+
