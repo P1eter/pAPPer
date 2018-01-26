@@ -15,8 +15,7 @@
 
     <string-array name="dance_list">
         <item>headbang</item>
-        <item>Macarena</item>
-        <item>Vacuum</item>
+        <item>vacuum</item>
     </string-array>
 
 </resources>
