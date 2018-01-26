@@ -52,6 +52,8 @@ public class RobotSelectFragment extends DialogFragment implements View.OnClickL
                 break;
         }
 
+        getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
+
 
 
 //        if (!networkSender.isRunning()) {
