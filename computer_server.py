@@ -5,11 +5,12 @@
  
 import socket
 import sys
-from thread import *
- 
+
 HOST = ''   # Symbolic name meaning all available interfaces
 PORT = 1717 # Arbitrary non-privileged port
 
+sys.path.append('dances')
+ 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.setsockopt(socket.SOL_SOCKET, socket.SO_SNDBUF, 9999)
 s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
@@ -25,52 +26,90 @@ except socket.error as msg:
 print 'Socket bind complete'
  
 #Start listening on socket
-s.listen(10)
+s.listen(0)
 print 'Socket now listening'
- 
-def handleData(data):
-    if data[:4] == "talk":
-        print data
-    if data[:4] == "move":
-        print data
+
+def dance(dance):
+    print dance
+    try :
+        variables = {}
+        execfile("dances/" + dance + ".py", variables)
+
+        if not move.robotIsWakeUp():
+            print "waking pepper up"
+            move.wakeUp()
+
+        move.angleInterpolationBezier(variables["names"], variables["times"], variables["keys"])
+    except Exception, e:
+        print e
+
+def handleData(data_string):
+    if data_string[:4] == "talk":
+        volume = int(data_string[5:].split(" ")[0])
+        print "talk with volume:", volume, data_string[6+len(str(volume)):]
+        # tts.say(data_string[6+len(str(volume)):])
+    elif data_string[:4] == "move":
+        x, y, theta = data_string[5:].split(" ")
+        # if not move.robotIsWakeUp():
+        #     print "waking Pepper up"
+            # move.wakeUp()
+        print "moving: x: %.2f, y: %.2f, theta: %.2f" % (float(x), float(y), float(theta))
+        # move.moveToward(float(x), float(y), float(theta))
+        # print "moving:", data_string[5:]
+    elif data_string[:4] == "wake":
+        print "wake up:", data_string[5:]
+        # move.wakeUp() if data_string[5] == "1" else move.rest()
+    elif data_string[:4] == "danc":
+        print "dancing:", data_string[5:]
+        # dance(data_string[5:])
+
+def preprocessData(data_string):
+    # only execute the first command that was sent
+    return data_string.split('\n')[0]
+
+def sendAlive():
+    conn.sendall("alive")
 
 #Function for handling connections. This will be used to create threads
-def clientthread(conn):
+def handleClient(conn):
     #Sending message to connected client
-    conn.send('Welcome to the server.\n') #send only takes string
-     
+    conn.send('Welcome to the server. Type something and hit enter\n') #send only takes string
+
     #infinite loop so that function do not terminate and thread do not end.
     while True:
-         
         #Receiving from client
         try:
             print "receiving..."
-            data = conn.recv(1024)
-            print "received"
+            data_string = conn.recv(1024)
         except Exception as e:
             print e
             break
 
-        # reply = 'Thanks for the message!: "' + data + '"'
-        if not data:
+        if data_string == "":
             break
 
-        print "I received: ", data
+        print "I received: \"", data_string, "\""
 
-        handleData(data)
+        data_string = preprocessData(data_string)
+        handleData(data_string)
+
+        # sendAlive();
      
         # conn.sendall(reply)
      
     #came out of loop
     conn.close()
- 
+
 #now keep talking with the client
 while 1:
     #wait to accept a connection - blocking call
     conn, addr = s.accept()
     print 'Connected with ' + addr[0] + ':' + str(addr[1])
-     
-    #start new thread takes 1st argument as a function name to be run, second is the tuple of arguments to the function.
-    start_new_thread(clientthread ,(conn,))
- 
+
+    handleClient(conn)
+
+    print "listening for connections again"     
+    # #start new thread takes 1st argument as a function name to be run, second is the tuple of arguments to the function.
+    # start_new_thread(clientthread ,(conn,))
+
 s.close()

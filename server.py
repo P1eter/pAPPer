@@ -5,7 +5,6 @@
  
 import socket
 import sys
-from thread import *
 from naoqi import ALProxy
 
 HOST = ''   # Symbolic name meaning all available interfaces
@@ -58,7 +57,11 @@ def dance(dance):
 
 def handleData(data_string):
     if data_string[:4] == "talk":
-        tts.say(data_string[5:])
+        volume = int(data_string[5:].split(" ")[0])
+        # data_string[6+len(str(volume)):]
+        
+        # TODO: TEST THIS
+        tts.say(data_string[6+len(str(volume)):])
     elif data_string[:4] == "move":
         x, y, theta = data_string[5:].split(" ")
         # print(split_move_command)
