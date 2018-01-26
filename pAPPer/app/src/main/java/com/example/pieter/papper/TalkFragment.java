@@ -65,7 +65,7 @@ public class TalkFragment extends Fragment implements View.OnClickListener {
                 String volume = String.valueOf(volume_seekbar.getProgress());
 
                 if (!message.isEmpty()){
-                    networkSender.talk(volume + message);
+                    networkSender.talk(volume + " " + message);
                 }
         }
     }

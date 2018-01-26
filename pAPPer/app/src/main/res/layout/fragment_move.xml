@@ -15,15 +15,12 @@
         android:layout_marginBottom="52dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:columnCount="3"
         android:rowCount="3"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/stiffness_onoff_togglebutton"
-        app:layout_constraintVertical_bias="0.481">
+        app:layout_constraintStart_toStartOf="parent">
 
         <ImageButton
             android:id="@+id/left_imagebutton"
@@ -67,15 +64,24 @@
 
     </GridLayout>
 
-    <ToggleButton
-        android:id="@+id/stiffness_onoff_togglebutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <Switch
+        android:id="@+id/switch1"
+        style="@android:style/Widget.Holo.Light.CompoundButton.Switch"
+        android:layout_width="242dp"
+        android:layout_height="46dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="36dp"
-        android:textOff="resting"
-        android:textOn="activated"
+        android:layout_marginTop="8dp"
+        android:showText="true"
+        android:splitTrack="false"
+        android:text="Wake up"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textOff="Resting"
+        android:textOn="Activated"
+        android:thumbTint="@color/colorPrimaryDark"
+        android:trackTint="@color/colorPrimary"
+        app:layout_constraintBottom_toTopOf="@+id/gridLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
