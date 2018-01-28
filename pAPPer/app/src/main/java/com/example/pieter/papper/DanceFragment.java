@@ -37,6 +37,11 @@ public class DanceFragment extends Fragment implements View.OnClickListener {
                 Spinner dance_spinner = getView().findViewById(R.id.pick_dance_spinner);
                 networkSender.dance(dance_spinner.getSelectedItem().toString());
                 break;
+            case R.id.dance_vacuum_button:
+                networkSender.dance("vacuum");
+                break;
+            case R.id.dance_headbang_button:
+                networkSender.dance("headbang");
         }
     }
 }

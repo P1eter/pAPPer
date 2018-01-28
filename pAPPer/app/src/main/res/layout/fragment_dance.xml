@@ -14,17 +14,20 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:entries="@array/dance_list"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/dance_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tableLayout"
+        app:layout_constraintVertical_bias="0.527" />
 
     <Button
         android:id="@+id/dance_button"
         android:layout_width="103dp"
         android:layout_height="47dp"
-        android:layout_marginBottom="80dp"
+        android:layout_marginBottom="44dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:text="@string/dance_button_text"
@@ -34,6 +37,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TableLayout
+        android:id="@+id/tableLayout"
         android:layout_width="368dp"
         android:layout_height="384dp"
         tools:layout_editor_absoluteX="8dp"
@@ -41,30 +45,34 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/button5"
+                android:id="@+id/dance_headbang_button"
                 android:layout_width="184dp"
                 android:layout_height="184dp"
+                android:backgroundTint="@color/colorPrimary"
                 android:text="headbang"
                 tools:layout_editor_absoluteX="8dp"
                 tools:layout_editor_absoluteY="8dp" />
 
             <Button
+                android:id="@+id/dance_vacuum_button"
                 android:layout_width="184dp"
                 android:layout_height="184dp"
+                android:backgroundTint="@color/colorPrimary"
                 android:text="vacuum" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <Button
                 android:id="@+id/button6"
                 android:layout_width="184dp"
                 android:layout_height="184dp"
+                android:backgroundTint="@color/colorPrimary"
                 android:text="something"
                 tools:layout_editor_absoluteX="16dp"
                 tools:layout_editor_absoluteY="42dp" />
@@ -73,6 +81,7 @@
                 android:id="@+id/button7"
                 android:layout_width="184dp"
                 android:layout_height="184dp"
+                android:backgroundTint="@color/colorPrimary"
                 android:text="something_else" />
         </TableRow>
     </TableLayout>
