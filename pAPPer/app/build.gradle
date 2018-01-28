@@ -28,4 +28,5 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     compile 'com.aldebaran:qisdk:1.1.7'
     implementation 'com.android.support:design:26.1.0'
+    compile 'io.github.controlwear:virtualjoystick:1.7.3'
 }

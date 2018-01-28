@@ -33,11 +33,11 @@ public class MoveFragment extends Fragment implements View.OnClickListener {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        view.findViewById(R.id.up_imagebutton).setOnClickListener(this);
-        view.findViewById(R.id.down_imagebutton).setOnClickListener(this);
-        view.findViewById(R.id.left_imagebutton).setOnClickListener(this);
-        view.findViewById(R.id.right_imagebutton).setOnClickListener(this);
-        view.findViewById(R.id.stop_button).setOnClickListener(this);
+//        view.findViewById(R.id.up_imagebutton).setOnClickListener(this);
+//        view.findViewById(R.id.down_imagebutton).setOnClickListener(this);
+//        view.findViewById(R.id.left_imagebutton).setOnClickListener(this);
+//        view.findViewById(R.id.right_imagebutton).setOnClickListener(this);
+//        view.findViewById(R.id.stop_button).setOnClickListener(this);
         view.findViewById(R.id.stiffness_onoff_switch).setOnClickListener(this);
     }
 
@@ -47,24 +47,24 @@ public class MoveFragment extends Fragment implements View.OnClickListener {
         float y = 0.f;
         float theta = 0.f;
         switch (view.getId()) {
-            case R.id.up_imagebutton:
-                x = X_VELOCITY;
-//                networkSender.move(X_VELOCITY, 0.f, 0.f);
-                break;
-            case R.id.down_imagebutton:
-                x = -X_VELOCITY;
-//                networkSender.move(-X_VELOCITY, 0.f, 0.f);
-                break;
-            case R.id.left_imagebutton:
-                theta = -THETA_VELOCITY;
-//                networkSender.move(0.f, 0.f, -THETA_VELOCITY);
-                break;
-            case R.id.right_imagebutton:
-                theta = THETA_VELOCITY;
-//                networkSender.move(0.f, 0.f, THETA_VELOCITY);
-                break;
-            case R.id.stop_button:
-                break;
+//            case R.id.up_imagebutton:
+//                x = X_VELOCITY;
+////                networkSender.move(X_VELOCITY, 0.f, 0.f);
+//                break;
+//            case R.id.down_imagebutton:
+//                x = -X_VELOCITY;
+////                networkSender.move(-X_VELOCITY, 0.f, 0.f);
+//                break;
+//            case R.id.left_imagebutton:
+//                theta = -THETA_VELOCITY;
+////                networkSender.move(0.f, 0.f, -THETA_VELOCITY);
+//                break;
+//            case R.id.right_imagebutton:
+//                theta = THETA_VELOCITY;
+////                networkSender.move(0.f, 0.f, THETA_VELOCITY);
+//                break;
+//            case R.id.stop_button:
+//                break;
             case R.id.stiffness_onoff_switch:
                 Switch tb = view.findViewById(R.id.stiffness_onoff_switch);
                 networkSender.wakeUp(tb.isChecked());
