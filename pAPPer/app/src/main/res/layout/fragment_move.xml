@@ -65,15 +65,13 @@
     </GridLayout>
 
     <Switch
-        android:id="@+id/switch1"
-        style="@android:style/Widget.Holo.Light.CompoundButton.Switch"
-        android:layout_width="242dp"
-        android:layout_height="46dp"
+        android:id="@+id/stiffness_onoff_switch"
+        android:layout_width="134dp"
+        android:layout_height="55dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:showText="true"
         android:splitTrack="false"
         android:text="Wake up"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"

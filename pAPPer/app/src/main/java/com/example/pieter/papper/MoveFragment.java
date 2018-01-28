@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.Switch;
 import android.widget.ToggleButton;
 
 
@@ -37,7 +38,7 @@ public class MoveFragment extends Fragment implements View.OnClickListener {
         view.findViewById(R.id.left_imagebutton).setOnClickListener(this);
         view.findViewById(R.id.right_imagebutton).setOnClickListener(this);
         view.findViewById(R.id.stop_button).setOnClickListener(this);
-        view.findViewById(R.id.stiffness_onoff_togglebutton).setOnClickListener(this);
+        view.findViewById(R.id.stiffness_onoff_switch).setOnClickListener(this);
     }
 
     @Override
@@ -64,8 +65,8 @@ public class MoveFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.stop_button:
                 break;
-            case R.id.stiffness_onoff_togglebutton:
-                ToggleButton tb = view.findViewById(R.id.stiffness_onoff_togglebutton);
+            case R.id.stiffness_onoff_switch:
+                Switch tb = view.findViewById(R.id.stiffness_onoff_switch);
                 networkSender.wakeUp(tb.isChecked());
                 return;
         }
