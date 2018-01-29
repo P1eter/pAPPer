@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen"
+    tools:context="com.example.pieter.papper.MoveFullscreenActivity">
+
+    <io.github.controlwear.virtual.joystick.android.JoystickView xmlns:custom="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/orientation_joystick"
+        android:layout_width="223dp"
+        android:layout_height="207dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="56dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="8dp"
+        custom:JV_backgroundColor="#f96060"
+        custom:JV_borderColor="#000000"
+        custom:JV_borderWidth="2dp"
+        custom:JV_buttonColor="#f96060"
+        custom:JV_buttonDirection="horizontal"
+        custom:JV_buttonImage="@drawable/papper_icon_small"
+        custom:JV_buttonSizeRatio="25%"
+        custom:JV_fixedCenter="true"
+        custom:layout_constraintBottom_toBottomOf="parent"
+        custom:layout_constraintEnd_toEndOf="parent"
+        custom:layout_constraintStart_toEndOf="@+id/movement_joystick"
+        custom:layout_constraintTop_toBottomOf="@+id/orientation_joystick_textview"
+        custom:layout_constraintVertical_bias="0.291" />
+
+
+    <io.github.controlwear.virtual.joystick.android.JoystickView
+        android:id="@+id/movement_joystick"
+        android:layout_width="223dp"
+        android:layout_height="207dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="8dp"
+        app:JV_backgroundColor="#f96060"
+        app:JV_borderColor="#000000"
+        app:JV_borderWidth="2dp"
+        app:JV_buttonColor="#f96060"
+        app:JV_buttonImage="@drawable/papper_icon_small"
+        app:JV_buttonSizeRatio="25%"
+        app:JV_fixedCenter="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/orientation_joystick"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/move_joystick_textview"
+        app:layout_constraintVertical_bias="0.326" />
+
+    <TextView
+        android:id="@+id/move_joystick_textview"
+        android:layout_width="208dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="Movement"
+        app:layout_constraintEnd_toStartOf="@+id/orientation_joystick_textview"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/orientation_joystick_textview"
+        android:layout_width="208dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="56dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="Orientation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/move_joystick_textview"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="36dp"
+        android:layout_height="34dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:drawable/btn_dialog"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</android.support.constraint.ConstraintLayout>
