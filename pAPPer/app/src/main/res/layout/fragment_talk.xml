@@ -25,7 +25,7 @@
 
     <EditText
         android:id="@+id/talk_editText"
-        android:layout_width="238dp"
+        android:layout_width="224dp"
         android:layout_height="47dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="36dp"
@@ -54,6 +54,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:progress="25"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.452"
         app:layout_constraintStart_toStartOf="parent"
@@ -66,7 +67,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="44dp"
-        android:text="Volume: 0"
+        android:text="Volume: 25"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.083"
         app:layout_constraintStart_toStartOf="parent"

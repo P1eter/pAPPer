@@ -60,7 +60,7 @@ public class RobotSelectFragment extends DialogFragment implements View.OnClickL
 
         switch (view.getId()) {
             case R.id.connect_button:
-                networkSender.setHost("192.168.178.92"); //192.168.0.103 = laptop, Pepper = Pepper
+                networkSender.setHost("Pepper"); //192.168.0.103 = laptop, Pepper = Pepper
                 networkSender.setPort(1717);
                 new Thread(networkSender).start();
                 break;
