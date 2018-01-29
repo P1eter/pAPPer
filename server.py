@@ -68,8 +68,9 @@ def handleData(data_string):
         if not move.robotIsWakeUp():
             print "waking Pepper up"
             move.wakeUp()
-        move.moveToward(float(x), float(y), float(theta))
-        print "moving:", data_string[5:]
+        if x < 1 and x > 0 and y < 1 and y > 0 and theta < 1 and theta > 0:
+            move.moveToward(float(x), float(y), float(theta))
+            print "moving:", data_string[5:]
     elif data_string[:4] == "wake":
         move.wakeUp() if data_string[5] == "1" else move.rest()
     elif data_string[:4] == "danc":
