@@ -7,43 +7,6 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <io.github.controlwear.virtual.joystick.android.JoystickView xmlns:custom="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/joystickView2"
-        android:layout_width="223dp"
-        android:layout_height="207dp"
-        android:layout_marginBottom="36dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        custom:JV_backgroundColor="#009688"
-        custom:JV_borderColor="#00796B"
-        custom:JV_borderWidth="4dp"
-        custom:JV_buttonColor="#FF6E40"
-        custom:JV_buttonSizeRatio="25%"
-        custom:JV_fixedCenter="true"
-        custom:layout_constraintBottom_toBottomOf="parent"
-        custom:layout_constraintEnd_toEndOf="parent"
-        custom:layout_constraintHorizontal_bias="0.503"
-        custom:layout_constraintStart_toStartOf="parent" />
-
-
-    <io.github.controlwear.virtual.joystick.android.JoystickView
-        android:id="@+id/joystickView"
-        android:layout_width="223dp"
-        android:layout_height="207dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:JV_backgroundColor="#009688"
-        app:JV_borderColor="#00796B"
-        app:JV_borderWidth="4dp"
-        app:JV_buttonColor="#FF6E40"
-        app:JV_buttonSizeRatio="25%"
-        app:JV_fixedCenter="true"
-        app:layout_constraintBottom_toTopOf="@+id/joystickView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/stiffness_onoff_switch" />
 
     <Switch
         android:id="@+id/stiffness_onoff_switch"
@@ -62,4 +25,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/to_fullscreen_move_button"
+        android:layout_width="92dp"
+        android:layout_height="91dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="48dp"
+        android:text="start moving"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/stiffness_onoff_switch" />
 </android.support.constraint.ConstraintLayout>

@@ -1,6 +1,7 @@
 package com.example.pieter.papper;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -39,6 +40,7 @@ public class MoveFragment extends Fragment implements View.OnClickListener {
 //        view.findViewById(R.id.right_imagebutton).setOnClickListener(this);
 //        view.findViewById(R.id.stop_button).setOnClickListener(this);
         view.findViewById(R.id.stiffness_onoff_switch).setOnClickListener(this);
+        view.findViewById(R.id.to_fullscreen_move_button).setOnClickListener(this);
     }
 
     @Override
@@ -69,6 +71,10 @@ public class MoveFragment extends Fragment implements View.OnClickListener {
                 Switch tb = view.findViewById(R.id.stiffness_onoff_switch);
                 networkSender.wakeUp(tb.isChecked());
                 return;
+            case R.id.to_fullscreen_move_button:
+                Intent intent = new Intent(getActivity(), MoveFullscreenActivity.class);
+                startActivity(intent);
+                break;
         }
 
         networkSender.move(x, y, theta);

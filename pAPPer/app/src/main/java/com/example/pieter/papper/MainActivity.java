@@ -3,11 +3,13 @@ package com.example.pieter.papper;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.IntentFilter;
+import android.content.pm.ActivityInfo;
 import android.net.nsd.NsdManager;
 import android.net.nsd.NsdServiceInfo;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.net.wifi.p2p.nsd.WifiP2pDnsSdServiceInfo;
 import android.os.AsyncTask;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -85,7 +87,14 @@ public class MainActivity extends AppCompatActivity implements OnConnectionChang
 //        networkSender.talk("Hi! My name is Pepper!");
     }
 
-//    /* register the broadcast receiver with the intent values to be matched */
+    @Override
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+    }
+
+    //    /* register the broadcast receiver with the intent values to be matched */
 //    @Override
 //    protected void onResume() {
 //        super.onResume();
