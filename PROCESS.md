@@ -36,3 +36,5 @@ In the weekend I changed some basic design and I found and added a joystick libr
 # day 11
 I implemented the full screen activity for the movement joysticks. I also connected the volume bar for talking and fixed some bugs.
 
+# day 12
+Today I did a lot of bugfixing, design improvements, and I added an autonomous life button.
