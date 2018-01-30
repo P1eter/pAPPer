@@ -33,3 +33,6 @@ Today I tried to use Peppers tablet to show a picture that the robot takes, but 
 # weekend
 In the weekend I changed some basic design and I found and added a joystick library.
 
+# day 11
+I implemented the full screen activity for the movement joysticks. I also connected the volume bar for talking and fixed some bugs.
+
