@@ -65,11 +65,12 @@ def handleData(data_string):
         tts.say(data_string[6+len(str(volume)):])
     elif data_string[:4] == "move":
         x, y, theta = data_string[5:].split(" ")
+        x, y, theta = float(x), float(y), float(theta)
         # print(split_move_command)
         if not move.robotIsWakeUp():
             print "waking Pepper up"
             move.wakeUp()
-        if x < 1 and x > 0 and y < 1 and y > 0 and theta < 1 and theta > 0:
+        if x <= 1 and x >= -1 and y <= 1 and y >= -1 and theta <= 1 and theta > -1:
             move.moveToward(float(x), float(y), float(theta))
             print "moving:", data_string[5:]
     elif data_string[:4] == "wake":

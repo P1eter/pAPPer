@@ -30,6 +30,10 @@ public class DanceFragment extends Fragment implements View.OnClickListener {
 //        view.findViewById(R.id.dance_button).setOnClickListener(this);
         view.findViewById(R.id.dance_headbang_button).setOnClickListener(this);
         view.findViewById(R.id.dance_vacuum_button).setOnClickListener(this);
+        view.findViewById(R.id.dance_picture_button).setOnClickListener(this);
+        view.findViewById(R.id.dance_sax_button).setOnClickListener(this);
+        view.findViewById(R.id.dance_guitar_button).setOnClickListener(this);
+        view.findViewById(R.id.dance_football_button).setOnClickListener(this);
     }
 
     @Override
@@ -44,6 +48,19 @@ public class DanceFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.dance_headbang_button:
                 networkSender.dance("headbang");
+                break;
+            case R.id.dance_picture_button:
+                networkSender.dance("take_picture");
+                break;
+            case R.id.dance_sax_button:
+                networkSender.dance("saxophone");
+                break;
+            case R.id.dance_guitar_button:
+                networkSender.dance("guitar");
+                break;
+            case R.id.dance_football_button:
+                networkSender.dance("football");
+                break;
         }
     }
 }
