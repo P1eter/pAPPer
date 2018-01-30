@@ -57,11 +57,11 @@ def dance(dance):
 
 def handleData(data_string):
     if data_string[:4] == "talk":
-        volume = round(int(data_string[5:].split(" ")[0]) / 100.0, 1)
+        volume = int(data_string[5:].split(" ")[0])
         # data_string[6+len(str(volume)):]
         
         print "Setting volume to", volume
-        tts.setVolume(volume)
+        tts.setVolume(round(volume / 10.0, 1))
         tts.say(data_string[6+len(str(volume)):])
     elif data_string[:4] == "move":
         x, y, theta = data_string[5:].split(" ")

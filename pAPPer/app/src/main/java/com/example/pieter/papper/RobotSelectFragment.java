@@ -60,7 +60,14 @@ public class RobotSelectFragment extends DialogFragment implements View.OnClickL
 
         switch (view.getId()) {
             case R.id.connect_button:
-                networkSender.setHost("Pepper"); //192.168.0.103 = laptop, Pepper = Pepper
+                Spinner robotSpinner = getView().findViewById(R.id.robot_select_spinner);
+                String host = "Pepper";
+
+                if (!robotSpinner.getSelectedItem().equals("No available robots")) {
+                    host = robotSpinner.getSelectedItem().toString();
+                }
+
+                networkSender.setHost(host);
                 networkSender.setPort(1717);
                 new Thread(networkSender).start();
                 break;

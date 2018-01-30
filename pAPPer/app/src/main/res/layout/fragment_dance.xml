@@ -7,79 +7,92 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <TableLayout
-        android:id="@+id/tableLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="28dp"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TableRow
+        <TableLayout
+            android:id="@+id/tableLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="28dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <Button
-                android:id="@+id/dance_headbang_button"
-                android:layout_width="154dp"
-                android:layout_height="154dp"
-                android:backgroundTint="@color/colorPrimary"
-                android:text="headbang"
-                tools:layout_editor_absoluteX="8dp"
-                tools:layout_editor_absoluteY="8dp" />
+            <TableRow
+                android:layout_width="310dp"
+                android:layout_height="wrap_content">
 
-            <Button
-                android:id="@+id/dance_vacuum_button"
-                android:layout_width="154dp"
-                android:layout_height="154dp"
-                android:backgroundTint="@color/colorPrimary"
-                android:text="vacuum" />
-        </TableRow>
+                <Button
+                    android:id="@+id/dance_headbang_button"
+                    android:layout_width="154dp"
+                    android:layout_height="154dp"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:text="headbang"
+                    tools:layout_editor_absoluteX="8dp"
+                    tools:layout_editor_absoluteY="8dp" />
 
-        <TableRow
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+                <Button
+                    android:id="@+id/dance_vacuum_button"
+                    android:layout_width="154dp"
+                    android:layout_height="154dp"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:text="vacuum" />
+            </TableRow>
 
-            <Button
-                android:id="@+id/dance_picture_button"
-                android:layout_width="154dp"
-                android:layout_height="154dp"
-                android:backgroundTint="@color/colorPrimary"
-                android:text="take picture"
-                tools:layout_editor_absoluteX="16dp"
-                tools:layout_editor_absoluteY="42dp" />
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
-            <Button
-                android:id="@+id/dance_sax_button"
-                android:layout_width="154dp"
-                android:layout_height="154dp"
-                android:backgroundTint="@color/colorPrimary"
-                android:text="saxophone" />
-        </TableRow>
+                <Button
+                    android:id="@+id/dance_picture_button"
+                    android:layout_width="154dp"
+                    android:layout_height="154dp"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:text="take picture"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="42dp" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+                <Button
+                    android:id="@+id/dance_sax_button"
+                    android:layout_width="154dp"
+                    android:layout_height="154dp"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:text="saxophone" />
+            </TableRow>
 
-            <Button
-                android:id="@+id/dance_guitar_button"
-                android:layout_width="154dp"
-                android:layout_height="154dp"
-                android:backgroundTint="@color/colorPrimary"
-                android:text="guitar"
-                tools:layout_editor_absoluteX="16dp"
-                tools:layout_editor_absoluteY="42dp" />
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
-            <Button
-                android:id="@+id/dance_football_button"
-                android:layout_width="154dp"
-                android:layout_height="154dp"
-                android:backgroundTint="@color/colorPrimary"
-                android:text="rugby" />
-        </TableRow>
-    </TableLayout>
+                <Button
+                    android:id="@+id/dance_guitar_button"
+                    android:layout_width="154dp"
+                    android:layout_height="154dp"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:text="guitar"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="42dp" />
+
+                <Button
+                    android:id="@+id/dance_football_button"
+                    android:layout_width="154dp"
+                    android:layout_height="154dp"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:text="rugby" />
+            </TableRow>
+        </TableLayout>
+
+    </ScrollView>
 
 </android.support.constraint.ConstraintLayout>
