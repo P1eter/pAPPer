@@ -12,6 +12,7 @@ PORT = 1717 # Arbitrary non-privileged port
 
 tts = ALProxy("ALTextToSpeech", "localhost", 9559)
 move = ALProxy("ALMotion", "localhost", 9559)
+autl = ALProxy("ALAutonomousLife", "localhost", 9559)
 
 sys.path.append('dances')
  
@@ -77,6 +78,13 @@ def handleData(data_string):
         move.wakeUp() if data_string[5] == "1" else move.rest()
     elif data_string[:4] == "danc":
         dance(data_string[5:])
+    elif data_string[:4] == "autl":
+        if data_string[5] == "1":
+            print "entering autonomous life state"
+            autl.setState("interactive")
+        elif data_string[5] == "0":
+            print "exiting autonomous life state"
+            autl.setState("disabled")
 
 def preprocessData(data_string):
     # only execute the first command that was sent

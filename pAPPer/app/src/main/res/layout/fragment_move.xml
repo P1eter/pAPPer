@@ -9,6 +9,24 @@
 
 
     <Switch
+        android:id="@+id/autonomous_life_switch"
+        android:layout_width="201dp"
+        android:layout_height="55dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="76dp"
+        android:splitTrack="false"
+        android:text="Autonomous Life"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textOff="Resting"
+        android:textOn="Activated"
+        android:thumbTint="@color/colorPrimaryDark"
+        android:trackTint="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/to_fullscreen_move_button" />
+
+    <Switch
         android:id="@+id/stiffness_onoff_switch"
         android:layout_width="134dp"
         android:layout_height="55dp"

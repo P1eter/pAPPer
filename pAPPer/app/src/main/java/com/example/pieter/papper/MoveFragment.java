@@ -41,6 +41,7 @@ public class MoveFragment extends Fragment implements View.OnClickListener {
 //        view.findViewById(R.id.stop_button).setOnClickListener(this);
         view.findViewById(R.id.stiffness_onoff_switch).setOnClickListener(this);
         view.findViewById(R.id.to_fullscreen_move_button).setOnClickListener(this);
+        view.findViewById(R.id.autonomous_life_switch).setOnClickListener(this);
     }
 
     @Override
@@ -75,8 +76,11 @@ public class MoveFragment extends Fragment implements View.OnClickListener {
                 Intent intent = new Intent(getActivity(), MoveFullscreenActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.autonomous_life_switch:
+                Switch autonomousLifeSwitch = view.findViewById(R.id.autonomous_life_switch);
+                networkSender.autonomousLife(autonomousLifeSwitch.isChecked());
         }
 
-        networkSender.move(x, y, theta);
+//        networkSender.move(x, y, theta);
     }
 }

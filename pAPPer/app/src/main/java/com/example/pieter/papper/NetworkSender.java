@@ -103,6 +103,10 @@ public class NetworkSender implements Runnable {
         sendQueue.add("danc " + dance);
     }
 
+    public void autonomousLife(boolean value) {
+        sendQueue.add("autl " + (value ? 1 : 0));
+    }
+
     public boolean openConnection() {
         System.out.println("Creating socket to '" + host + "' on port " + port);
 
