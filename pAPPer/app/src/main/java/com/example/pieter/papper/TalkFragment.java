@@ -40,7 +40,10 @@ public class TalkFragment extends Fragment implements View.OnClickListener {
         @Override
         public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
             TextView volume_textview = getView().findViewById(R.id.volume_textview);
-            volume_textview.setText("Volume: " +  String.valueOf(i));
+            volume_textview.setText("Volume: " +  String.valueOf(i * 10) + "%");
+
+//            int progress = ((int) Math.round(i / 10)) * 10;
+//            seekBar.setProgress(progress);
         }
 
         @Override
