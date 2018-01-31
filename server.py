@@ -13,6 +13,8 @@ PORT = 1717 # Arbitrary non-privileged port
 tts = ALProxy("ALTextToSpeech", "localhost", 9559)
 move = ALProxy("ALMotion", "localhost", 9559)
 autl = ALProxy("ALAutonomousLife", "localhost", 9559)
+ap = ALProxy("ALAudioPlayer", "localhost", 9559)
+ansp = ALProxy("ALAnimatedSpeech", "localhost", 9559)
 
 sys.path.append('dances')
  
@@ -44,6 +46,9 @@ def dance(dance):
             print "waking pepper up"
             move.wakeUp()
 
+        if dance == "saxophone":
+            ap.playFile("/home/nao/sounds/epicsax.ogg")
+
         move.angleInterpolationBezier(variables["names"], variables["times"], variables["keys"])
     except Exception, e:
         print e
@@ -58,12 +63,20 @@ def dance(dance):
 
 def handleData(data_string):
     if data_string[:4] == "talk":
-        volume = int(data_string[5:].split(" ")[0])
+        volume, animated_speech = data_string[5:].split(" ")[:2]
+        volume, animated_speech = int(volume), bool(int(animated_speech))
         # data_string[6+len(str(volume)):]
+        text = data_string[8+len(str(volume)):]
         
         print "Setting volume to", volume
         tts.setVolume(round(volume / 10.0, 1))
-        tts.say(data_string[6+len(str(volume)):])
+
+        print "animated speech:", animated_speech
+
+        if animated_speech:
+            ansp.say(text)
+        else:
+            tts.say(text)
     elif data_string[:4] == "move":
         x, y, theta = data_string[5:].split(" ")
         x, y, theta = float(x), float(y), float(theta)

@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
+import android.widget.Switch;
 import android.widget.TextView;
 
 
@@ -32,6 +33,8 @@ public class TalkFragment extends Fragment implements View.OnClickListener {
         super.onViewCreated(view, savedInstanceState);
 
         view.findViewById(R.id.talk_button).setOnClickListener(this);
+//        view.findViewById(R.id.animated_speech_switch).setOnClickListener(this);
+
         SeekBar volume_seekbar = view.findViewById(R.id.volume_seekBar);
         volume_seekbar.setOnSeekBarChangeListener(new SeekBarChangedListener());
     }
@@ -67,8 +70,11 @@ public class TalkFragment extends Fragment implements View.OnClickListener {
                 SeekBar volume_seekbar = getView().findViewById(R.id.volume_seekBar);
                 String volume = String.valueOf(volume_seekbar.getProgress());
 
+                Switch animated_speech_switch = getView().findViewById(R.id.animated_speech_switch);
+                int animated_speech = animated_speech_switch.isChecked() ? 1 : 0;
+
                 if (!message.isEmpty()){
-                    networkSender.talk(volume + " " + message);
+                    networkSender.talk(volume + " " + animated_speech + " " + message);
                 }
         }
     }
