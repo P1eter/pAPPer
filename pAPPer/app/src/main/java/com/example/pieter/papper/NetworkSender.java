@@ -121,6 +121,11 @@ public class NetworkSender implements Runnable {
     }
 
     public boolean closeConnection() {
+        // check if connection might be closed already by host
+        if (!connectionOpen) {
+            return true;
+        }
+
         try {
             socket.close();
             Log.i(TAG, "Host closed connection, disconnecting...");
