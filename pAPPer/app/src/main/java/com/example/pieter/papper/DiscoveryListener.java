@@ -1,3 +1,9 @@
+/**
+ * Pieter Kronemeijer (11064838)
+ *
+ * This class handles the detection of available robots on the network.
+ */
+
 package com.example.pieter.papper;
 
 import android.content.Context;
@@ -7,9 +13,7 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
-/**
- * Created by pieter on 26-1-18.
- */
+
 public class DiscoveryListener implements NsdManager.DiscoveryListener {
     private static final String TAG = "DiscoveryListener";
     private static final String SERVICE_TYPE = "_naoqi._tcp";
@@ -19,11 +23,11 @@ public class DiscoveryListener implements NsdManager.DiscoveryListener {
 
     DiscoveryListener(Context baseContext) {
         availableRobots.add(DEFAULT_ROBOT_ENTRY);
+
         mNsdManager = (NsdManager) baseContext.getSystemService(Context.NSD_SERVICE);
         mNsdManager.discoverServices(SERVICE_TYPE, NsdManager.PROTOCOL_DNS_SD, this);
     }
 
-    // Called as soon as service discovery begins.
     @Override
     public void onDiscoveryStarted(String regType) {
         Log.d(TAG, "Service discovery started");
@@ -31,6 +35,7 @@ public class DiscoveryListener implements NsdManager.DiscoveryListener {
 
     @Override
     public void onServiceFound(NsdServiceInfo service) {
+        // check if only default list entry is present
         if (availableRobots.size() > 0 && availableRobots.get(0).equals(DEFAULT_ROBOT_ENTRY)) {
             availableRobots.clear();
         }
@@ -40,12 +45,12 @@ public class DiscoveryListener implements NsdManager.DiscoveryListener {
 
     @Override
     public void onServiceLost(NsdServiceInfo service) {
-        // When the network service is no longer available.
-        // Internal bookkeeping code goes here.
-        availableRobots.remove(service.getServiceName().toString());
+        availableRobots.remove(service.getServiceName());
+
         if (availableRobots.size() == 0) {
             availableRobots.add(DEFAULT_ROBOT_ENTRY);
         }
+
         Log.d(TAG, "Service lost: " + service);
     }
 

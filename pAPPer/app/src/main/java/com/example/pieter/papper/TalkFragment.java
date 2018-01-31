@@ -1,3 +1,9 @@
+/**
+ * Pieter Kronemeijer (11064838)
+ *
+ * This is the tab that handles the talking of the robot.
+ */
+
 package com.example.pieter.papper;
 
 
@@ -12,17 +18,12 @@ import android.widget.SeekBar;
 import android.widget.Switch;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class TalkFragment extends Fragment implements View.OnClickListener {
     private final NetworkSender networkSender = NetworkSender.getInstance();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_talk, container, false);
     }
 
@@ -32,26 +33,36 @@ public class TalkFragment extends Fragment implements View.OnClickListener {
 
         view.findViewById(R.id.talk_button).setOnClickListener(this);
 
-        SeekBar volumeSeekbar = view.findViewById(R.id.volume_seekBar);
-        volumeSeekbar.setOnSeekBarChangeListener(new SeekBarChangedListener(getActivity()));
+        // set listener on SeekBar that sets the correct volume value in the TextView
+        SeekBar volumeSeekBar = view.findViewById(R.id.volume_seekBar);
+        volumeSeekBar.setOnSeekBarChangeListener(new SeekBarChangedListener(getActivity()));
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.talk_button:
-                EditText talkEditText = getView().findViewById(R.id.talk_editText);
-                String message = talkEditText.getText().toString();
+                handleTalk();
+        }
+    }
 
-                SeekBar volumeSeekbar = getView().findViewById(R.id.volume_seekBar);
-                String volume = String.valueOf(volumeSeekbar.getProgress());
+    /**
+     * This function extracts the message, the volume and the 'Animated Speech' option from the
+     * correct resources and builds a server readable string from these values.
+     */
+    private void handleTalk() {
+        EditText talkEditText = getView().findViewById(R.id.talk_editText);
+        String message = talkEditText.getText().toString();
 
-                Switch animatedSpeechSwitch = getView().findViewById(R.id.animated_speech_switch);
-                int animatedSpeech = animatedSpeechSwitch.isChecked() ? 1 : 0;
+        SeekBar volumeSeekBar = getView().findViewById(R.id.volume_seekBar);
+        String volume = String.valueOf(volumeSeekBar.getProgress());
 
-                if (!message.isEmpty()){
-                    networkSender.talk(volume + " " + animatedSpeech + " " + message);
-                }
+        Switch animatedSpeechSwitch = getView().findViewById(R.id.animated_speech_switch);
+        int animatedSpeech = animatedSpeechSwitch.isChecked() ? 1 : 0;
+
+        // don't send if message is empty
+        if (!message.isEmpty()){
+            networkSender.talk(volume + " " + animatedSpeech + " " + message);
         }
     }
 }

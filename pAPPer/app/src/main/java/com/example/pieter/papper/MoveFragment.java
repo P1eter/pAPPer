@@ -1,5 +1,10 @@
-package com.example.pieter.papper;
+/**
+ * Pieter Kronemeijer (11064838)
+ *
+ * This is the tab that handles movement of the robot.
+ */
 
+package com.example.pieter.papper;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,9 +16,6 @@ import android.view.ViewGroup;
 import android.widget.Switch;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class MoveFragment extends Fragment implements View.OnClickListener {
     private final NetworkSender networkSender = NetworkSender.getInstance();
 
@@ -37,10 +39,12 @@ public class MoveFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.stiffness_onoff_switch:
-                Switch tb = view.findViewById(R.id.stiffness_onoff_switch);
-                networkSender.wakeUp(tb.isChecked());
+                // activate stiffness in the joints, so the robot can move
+                Switch stiffnessSwitch = view.findViewById(R.id.stiffness_onoff_switch);
+                networkSender.wakeUp(stiffnessSwitch.isChecked());
                 return;
             case R.id.to_fullscreen_move_button:
+                // start the joystick activity
                 Intent intent = new Intent(getActivity(), MoveFullscreenActivity.class);
                 startActivity(intent);
                 break;

@@ -1,3 +1,10 @@
+/**
+ * Pieter Kronemeijer (11064838)
+ *
+ * This is a wrapper class around the tabs in the app. It also initializes
+ * the network discovery and sets the menu item.
+ */
+
 package com.example.pieter.papper;
 
 import android.content.pm.ActivityInfo;
@@ -17,17 +24,16 @@ import static java.lang.Math.min;
 public class MainActivity extends AppCompatActivity implements OnConnectionChangedListener {
     private final String[] TABTEXTS = {"Talk", "Walk", "Dance"};
     private final NetworkSender networkSender = NetworkSender.getInstance();
-    private Toolbar toolbar;
+//    private Toolbar toolbar;
     private MenuItem connectIcon;
     private DiscoveryListener mDiscoveryListener;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        toolbar = findViewById(R.id.tool_bar);
+        Toolbar toolbar = findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
         makeTabs();
@@ -65,7 +71,8 @@ public class MainActivity extends AppCompatActivity implements OnConnectionChang
         TabLayout tabLayout = findViewById(R.id.tab_layout);
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        TabPagerAdapter tabPagerAdapter = new TabPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+        TabPagerAdapter tabPagerAdapter = new TabPagerAdapter(getSupportFragmentManager(),
+                tabLayout.getTabCount());
         ViewPager viewPager = findViewById(R.id.tab_view_pager);
         viewPager.setAdapter(tabPagerAdapter);
 
@@ -79,28 +86,35 @@ public class MainActivity extends AppCompatActivity implements OnConnectionChang
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.actions, menu);
-        connectIcon = menu.findItem(R.id.options_menuitem);
+
+        // callback for 'onConnectionChanged', to set connection icon
         networkSender.setCallback(this);
+        connectIcon = menu.findItem(R.id.connect_menuitem);
+
         return super.onCreateOptionsMenu(menu);
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.options_menuitem:
-                Bundle arguments = new Bundle();
-                arguments.putStringArrayList("robots", mDiscoveryListener.availableRobots);
-
-                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                RobotSelectFragment fragment = new RobotSelectFragment();
-                fragment.setArguments(arguments);
-                fragment.show(ft, "dialog");
+            case R.id.connect_menuitem:
+                toConnectFragment();
                 return true;
         }
         return false;
     }
 
+    private void toConnectFragment() {
+        // put available robots as argument to the connection fragment
+        Bundle arguments = new Bundle();
+        arguments.putStringArrayList("robots", mDiscoveryListener.availableRobots);
+
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        RobotSelectFragment fragment = new RobotSelectFragment();
+        fragment.setArguments(arguments);
+        fragment.show(ft, "dialog");
+    }
+
     public void initializeDiscoveryListener() {
-        // Instantiate a new DiscoveryListener
         mDiscoveryListener = new DiscoveryListener(getBaseContext());
     }
 }

@@ -1,8 +1,12 @@
+/**
+ * Pieter Kronemeijer (11064838)
+ *
+ * This singleton class gets movement data from the left joystick and orientation data
+ * from the right joystick, and combines both into one command for the robot.
+ */
+
 package com.example.pieter.papper;
 
-/**
- * Created by pieter on 29-1-18.
- */
 
 public class JoystickCombinator {
     private NetworkSender networkSender = NetworkSender.getInstance();
@@ -12,6 +16,7 @@ public class JoystickCombinator {
     private float theta = 0.f;
 
     private JoystickCombinator() {
+        // empty private constructor for singleton class
     }
 
     public static JoystickCombinator getInstance() {
@@ -21,6 +26,9 @@ public class JoystickCombinator {
         return instance;
     }
 
+    /**
+     * Sets the speed in the x direction (forward) and sends value to the robot.
+     */
     public void setX(float x) {
         if (this.x != x) {
             this.x = x;
@@ -28,6 +36,9 @@ public class JoystickCombinator {
         }
     }
 
+    /**
+     * Sets the speed in the y direction (left) and sends value to the robot.
+     */
     public void setY(float y) {
         if (this.y != y) {
             this.y = y;
@@ -35,6 +46,9 @@ public class JoystickCombinator {
         }
     }
 
+    /**
+     * Sets the turning speed (counter clockwise) and sends value to the robot.
+     */
     public void setTheta(float theta) {
         if (this.theta != theta) {
             this.theta = theta;
@@ -42,6 +56,9 @@ public class JoystickCombinator {
         }
     }
 
+    /**
+     * Send a move command to the robot.
+     */
     private void update() {
         networkSender.move(this.x, this.y, this.theta);
     }

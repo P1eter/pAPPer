@@ -1,16 +1,19 @@
+/**
+ * Pieter Kronemeijer (11064838)
+ *
+ * This adapter handles the switching of the tabs. It extends FragmentPagerAdapter instead
+ * of FragmentStatePagerAdapter, since the tabs are lightweight.
+ */
+
 package com.example.pieter.papper;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-/**
- * Created by pieter on 31-1-18.
- */
 
-// fragmentpager, since FragmentStatePagerAdapter is for more and heavier tabs
 public class TabPagerAdapter extends FragmentPagerAdapter {
-    int nTabs;
+    private int nTabs;
 
     public TabPagerAdapter(FragmentManager fm, int nTabs) {
         super(fm);

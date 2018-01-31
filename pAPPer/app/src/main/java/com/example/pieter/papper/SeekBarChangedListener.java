@@ -1,12 +1,16 @@
+/**
+ * Pieter Kronemeijer (11064838)
+ *
+ * This class is a listener for the volume seekbar. It sets the text in the TextView
+ * that shows the current volume setting.
+ */
+
 package com.example.pieter.papper;
 
 import android.app.Activity;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-/**
- * Created by pieter on 31-1-18.
- */
 
 public class SeekBarChangedListener implements SeekBar.OnSeekBarChangeListener {
     private Activity activity;

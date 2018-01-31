@@ -1,3 +1,9 @@
+/**
+ * Pieter Kronemeijer (11064838)
+ *
+ * This singleton class handles all the communication with the robot
+ */
+
 package com.example.pieter.papper;
 
 import android.util.Log;
@@ -11,13 +17,10 @@ import java.util.PriorityQueue;
 
 import static java.lang.Thread.sleep;
 
-/**
- * Created by pkronemeijer on 22-1-18.
- */
 
 public class NetworkSender implements Runnable {
-    private static NetworkSender instance;
     private static final String TAG = "NetworkSender";
+    private static NetworkSender instance;
     private Socket socket;
     private BufferedReader in;
     private PrintWriter out;
@@ -28,11 +31,11 @@ public class NetworkSender implements Runnable {
     private OnConnectionChangedListener onConnectionChangedListener;
 
     private NetworkSender() {
+        // empty private constructor of singleton class
     }
 
     public static NetworkSender getInstance() {
         if (instance == null) {
-            // call the private constructor
             instance = new NetworkSender();
         }
         return instance;
@@ -46,9 +49,9 @@ public class NetworkSender implements Runnable {
 
         while (checkConnection()) {
             if (!sendQueue.isEmpty()) {
-                Log.d(TAG, "Sending: " + sendQueue.peek());
                 send(sendQueue.poll());
 
+                // limit the update rate to prevent network flooding (server runs even slower)
                 try {
                     sleep(2);
                 } catch (InterruptedException e) {
@@ -57,6 +60,7 @@ public class NetworkSender implements Runnable {
             }
         }
 
+        // connection can still be open here if an error has occurred
         if (connectionOpen) {
             closeConnection();
         }
@@ -65,10 +69,8 @@ public class NetworkSender implements Runnable {
     private void send(String message) {
         Log.d(TAG, "sending... \"" + message + "\"");
         try {
-            Log.d(TAG, "1");
             out.write(message + "\n");
             out.flush();
-            Log.d(TAG, "2");
         } catch (NullPointerException e) {
             Log.d(TAG, "Cannot send message!", e);
         }
@@ -95,6 +97,7 @@ public class NetworkSender implements Runnable {
     }
 
     public boolean openConnection() {
+        // make sure previous connection is closed before opening a new one
         if (connectionOpen && !closeConnection()) {
             return false;
         }
@@ -103,8 +106,10 @@ public class NetworkSender implements Runnable {
             socket = new Socket(host, port);
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             out = new PrintWriter(socket.getOutputStream(), true);
+            // clear send queue of old commands
             sendQueue.clear();
             connectionOpen = true;
+            // invoke callback method notifying an opened connection
             onConnectionChangedListener.onConnectionChanged(true);
         } catch (IOException e) {
             // TODO: make toast
@@ -121,10 +126,12 @@ public class NetworkSender implements Runnable {
             Log.i(TAG, "Host closed connection, disconnecting...");
             sendQueue.clear();
 
+            // clear all data from the previous connection
             socket = null;
             in = null;
             out = null;
             connectionOpen = false;
+            // invoke callback method notifying that the connection has closed
             onConnectionChangedListener.onConnectionChanged(false);
             return true;
         } catch (IOException e) {
@@ -133,22 +140,13 @@ public class NetworkSender implements Runnable {
         }
     }
 
-    private void getMessages() {
-        try {
-            if (in.ready() && in.readLine() == null) {
-                Log.d(TAG, "response: null");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-        }
-    }
-
+    /**
+     * Check if the connection is still open and valid.
+     */
     private boolean checkConnection() {
         try {
             if (connectionOpen && in.ready() && in.readLine() == null) {
-                Log.d(TAG, "response: null");
+                Log.d(TAG, "Connection was closed by host");
                 return false;
             }
         } catch (Exception e) {

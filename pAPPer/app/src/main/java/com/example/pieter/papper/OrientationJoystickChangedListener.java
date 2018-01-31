@@ -11,7 +11,7 @@ public class OrientationJoystickChangedListener implements JoystickView.OnMoveLi
 
     @Override
     public void onMove(int angle, int strength) {
-        int theta = angle != 0 ? 1 : -1;
+        int theta = (angle != 0) ? 1 : -1;
 
         jsc.setTheta(theta * (strength / 100.f));
     }

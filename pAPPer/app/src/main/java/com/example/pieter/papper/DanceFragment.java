@@ -1,5 +1,10 @@
-package com.example.pieter.papper;
+/**
+ * Pieter Kronemeijer (11064838)
+ *
+ * This is the tab that handles the robot performing dances.
+ */
 
+package com.example.pieter.papper;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,9 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class DanceFragment extends Fragment implements View.OnClickListener {
     private final NetworkSender networkSender = NetworkSender.getInstance();
 
