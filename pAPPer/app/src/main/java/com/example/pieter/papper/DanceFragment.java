@@ -8,12 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-
 /**
  * A simple {@link Fragment} subclass.
  */
 public class DanceFragment extends Fragment implements View.OnClickListener {
-    NetworkSender networkSender = NetworkSender.getInstance();
+    private final NetworkSender networkSender = NetworkSender.getInstance();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

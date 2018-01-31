@@ -15,8 +15,8 @@ import android.view.MenuItem;
 import static java.lang.Math.min;
 
 public class MainActivity extends AppCompatActivity implements OnConnectionChangedListener {
-    private String[] TABTEXTS = {"Talk", "Walk", "Dance"};
-    private NetworkSender networkSender = NetworkSender.getInstance();
+    private final String[] TABTEXTS = {"Talk", "Walk", "Dance"};
+    private final NetworkSender networkSender = NetworkSender.getInstance();
     private Toolbar toolbar;
     private MenuItem connectIcon;
     private DiscoveryListener mDiscoveryListener;
@@ -100,9 +100,7 @@ public class MainActivity extends AppCompatActivity implements OnConnectionChang
     }
 
     public void initializeDiscoveryListener() {
-
         // Instantiate a new DiscoveryListener
-        System.out.println("made discoverylistener");
         mDiscoveryListener = new DiscoveryListener(getBaseContext());
     }
 }

@@ -15,8 +15,6 @@ import android.widget.Spinner;
  * A simple {@link Fragment} subclass.
  */
 public class RobotSelectFragment extends DialogFragment implements View.OnClickListener {
-    String TAG = "RobotSelectFragment";
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -24,6 +22,7 @@ public class RobotSelectFragment extends DialogFragment implements View.OnClickL
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_robot_select, container, false);
     }
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -40,7 +39,6 @@ public class RobotSelectFragment extends DialogFragment implements View.OnClickL
 
         robotSpinner.setAdapter(adapter);
     }
-
 
     @Override
     public void onClick(View view) {

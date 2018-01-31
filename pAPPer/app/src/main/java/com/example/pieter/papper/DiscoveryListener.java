@@ -12,16 +12,15 @@ import java.util.ArrayList;
  */
 public class DiscoveryListener implements NsdManager.DiscoveryListener {
     private static final String TAG = "DiscoveryListener";
+    private static final String SERVICE_TYPE = "_naoqi._tcp";
+    private static final String DEFAULT_ROBOT_ENTRY = "No available robots";
     private NsdManager mNsdManager;
-    private String SERVICE_TYPE = "_naoqi._tcp";
-    private String DEFAULT_ROBOT_ENTRY = "No available robots";
     public ArrayList<String> availableRobots = new ArrayList<>();
 
     DiscoveryListener(Context baseContext) {
         availableRobots.add(DEFAULT_ROBOT_ENTRY);
         mNsdManager = (NsdManager) baseContext.getSystemService(Context.NSD_SERVICE);
         mNsdManager.discoverServices(SERVICE_TYPE, NsdManager.PROTOCOL_DNS_SD, this);
-        System.out.println("DiscoveryListener() IS MADE");
     }
 
     // Called as soon as service discovery begins.
@@ -32,13 +31,6 @@ public class DiscoveryListener implements NsdManager.DiscoveryListener {
 
     @Override
     public void onServiceFound(NsdServiceInfo service) {
-        System.out.println("found a service!");
-        System.out.println(service.getHost());
-        System.out.println(service.getPort());
-        System.out.println(service.getServiceName());
-        System.out.println(service.getServiceType());
-        System.out.println(service.toString());
-
         if (availableRobots.size() > 0 && availableRobots.get(0).equals(DEFAULT_ROBOT_ENTRY)) {
             availableRobots.clear();
         }
@@ -54,12 +46,12 @@ public class DiscoveryListener implements NsdManager.DiscoveryListener {
         if (availableRobots.size() == 0) {
             availableRobots.add(DEFAULT_ROBOT_ENTRY);
         }
-        Log.e(TAG, "service lost" + service);
+        Log.d(TAG, "Service lost: " + service);
     }
 
     @Override
     public void onDiscoveryStopped(String serviceType) {
-        Log.i(TAG, "Discovery stopped: " + serviceType);
+        Log.d(TAG, "Discovery stopped: " + serviceType);
     }
 
     @Override

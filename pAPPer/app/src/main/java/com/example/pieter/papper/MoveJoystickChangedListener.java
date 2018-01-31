@@ -7,7 +7,7 @@ import io.github.controlwear.virtual.joystick.android.JoystickView;
  */
 
 public class MoveJoystickChangedListener implements JoystickView.OnMoveListener {
-    private JoystickCombinator jsc = JoystickCombinator.getInstance();
+    private final JoystickCombinator jsc = JoystickCombinator.getInstance();
 
     @Override
     public void onMove(int angle, int strength) {

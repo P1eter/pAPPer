@@ -19,7 +19,6 @@ public class TabPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        System.out.println("NEXT FRAGMENT");
         switch(position) {
             case 0:
                 return new TalkFragment();

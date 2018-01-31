@@ -44,15 +44,6 @@ public class NetworkSender implements Runnable {
             return;
         }
 
-        System.out.println("NetworkSender: run()");
-        System.out.println(socket.getChannel());
-        System.out.println(socket.getInetAddress());
-        System.out.println(socket.getLocalAddress());
-        System.out.println(socket.getLocalPort());
-        System.out.println(socket.getLocalSocketAddress());
-        System.out.println(socket.getPort());
-        System.out.println(socket.getRemoteSocketAddress());
-
         while (checkConnection()) {
             if (!sendQueue.isEmpty()) {
                 Log.d(TAG, "Sending: " + sendQueue.peek());
@@ -104,8 +95,6 @@ public class NetworkSender implements Runnable {
     }
 
     public boolean openConnection() {
-        System.out.println("Creating socket to '" + host + "' on port " + port);
-
         if (connectionOpen && !closeConnection()) {
             return false;
         }

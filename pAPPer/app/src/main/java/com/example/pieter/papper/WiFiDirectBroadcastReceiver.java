@@ -27,7 +27,6 @@ public class WiFiDirectBroadcastReceiver extends BroadcastReceiver {
         public void onPeersAvailable(WifiP2pDeviceList peerList) {
             // TODO: USE WIFIP2PDEVICELIST
             // https://developer.android.com/reference/android/net/wifi/p2p/WifiP2pDeviceList.html
-            System.out.println("DEVICE LIST TO STRING: " + peerList.toString());
 
             peers.clear();
             peers.addAll(peerList.getDeviceList());

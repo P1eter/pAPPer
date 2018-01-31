@@ -18,12 +18,12 @@ public class MoveFullscreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_move_fullscreen);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
 
-        JoystickView move_joystick = findViewById(R.id.movement_joystick);
-        JoystickView orientation_joystick = findViewById(R.id.orientation_joystick);
+        JoystickView moveJoystick = findViewById(R.id.movement_joystick);
+        JoystickView orientationJoystick = findViewById(R.id.orientation_joystick);
 
-        move_joystick.setOnMoveListener(new MoveJoystickChangedListener());
+        moveJoystick.setOnMoveListener(new MoveJoystickChangedListener());
 
-        orientation_joystick.setOnMoveListener(new OrientationJoystickChangedListener());
+        orientationJoystick.setOnMoveListener(new OrientationJoystickChangedListener());
     }
 
     @Override

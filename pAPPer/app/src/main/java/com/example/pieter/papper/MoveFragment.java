@@ -15,7 +15,7 @@ import android.widget.Switch;
  * A simple {@link Fragment} subclass.
  */
 public class MoveFragment extends Fragment implements View.OnClickListener {
-    private NetworkSender networkSender = NetworkSender.getInstance();
+    private final NetworkSender networkSender = NetworkSender.getInstance();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

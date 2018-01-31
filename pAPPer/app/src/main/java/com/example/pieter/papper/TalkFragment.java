@@ -16,7 +16,7 @@ import android.widget.Switch;
  * A simple {@link Fragment} subclass.
  */
 public class TalkFragment extends Fragment implements View.OnClickListener {
-    private NetworkSender networkSender = NetworkSender.getInstance();
+    private final NetworkSender networkSender = NetworkSender.getInstance();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -32,25 +32,25 @@ public class TalkFragment extends Fragment implements View.OnClickListener {
 
         view.findViewById(R.id.talk_button).setOnClickListener(this);
 
-        SeekBar volume_seekbar = view.findViewById(R.id.volume_seekBar);
-        volume_seekbar.setOnSeekBarChangeListener(new SeekBarChangedListener(getActivity()));
+        SeekBar volumeSeekbar = view.findViewById(R.id.volume_seekBar);
+        volumeSeekbar.setOnSeekBarChangeListener(new SeekBarChangedListener(getActivity()));
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.talk_button:
-                EditText talk_et = getView().findViewById(R.id.talk_editText);
-                String message = talk_et.getText().toString();
+                EditText talkEditText = getView().findViewById(R.id.talk_editText);
+                String message = talkEditText.getText().toString();
 
-                SeekBar volume_seekbar = getView().findViewById(R.id.volume_seekBar);
-                String volume = String.valueOf(volume_seekbar.getProgress());
+                SeekBar volumeSeekbar = getView().findViewById(R.id.volume_seekBar);
+                String volume = String.valueOf(volumeSeekbar.getProgress());
 
-                Switch animated_speech_switch = getView().findViewById(R.id.animated_speech_switch);
-                int animated_speech = animated_speech_switch.isChecked() ? 1 : 0;
+                Switch animatedSpeechSwitch = getView().findViewById(R.id.animated_speech_switch);
+                int animatedSpeech = animatedSpeechSwitch.isChecked() ? 1 : 0;
 
                 if (!message.isEmpty()){
-                    networkSender.talk(volume + " " + animated_speech + " " + message);
+                    networkSender.talk(volume + " " + animatedSpeech + " " + message);
                 }
         }
     }
