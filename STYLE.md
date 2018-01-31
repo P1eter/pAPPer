@@ -3,7 +3,7 @@ This document represents a small style guide, which will serve as a guideline fo
 
 - Braces: no line break before the opening brace
 - line break after the opening brace
-- line break before the closing brace.
+- line break before the closing brace
 - line break after the closing brace, only if that brace terminates a statement or terminates the body of a method, constructor, or named class. For example, there is no line break after the brace if it is followed by else or a comma
 - Indentation: Four spaces per indentation layer
 - One statement per line
@@ -19,7 +19,7 @@ This document represents a small style guide, which will serve as a guideline fo
 - In function: max 2 comment lines
 - Class names: UpperCamelCase
 - Method names: lowerCamelCase
-- Variable names: with_underscore
+- Variable names: lowerCamelCase
 - Constants: CAPITALS_WITH_UNDERSCORE
 - Everything in English
 - Spaces after commas
