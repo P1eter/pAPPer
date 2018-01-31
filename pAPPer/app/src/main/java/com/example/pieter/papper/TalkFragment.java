@@ -36,28 +36,7 @@ public class TalkFragment extends Fragment implements View.OnClickListener {
 //        view.findViewById(R.id.animated_speech_switch).setOnClickListener(this);
 
         SeekBar volume_seekbar = view.findViewById(R.id.volume_seekBar);
-        volume_seekbar.setOnSeekBarChangeListener(new SeekBarChangedListener());
-    }
-
-    private class SeekBarChangedListener implements SeekBar.OnSeekBarChangeListener {
-        @Override
-        public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-            TextView volume_textview = getView().findViewById(R.id.volume_textview);
-            volume_textview.setText("Volume: " +  String.valueOf(i * 10) + "%");
-
-//            int progress = ((int) Math.round(i / 10)) * 10;
-//            seekBar.setProgress(progress);
-        }
-
-        @Override
-        public void onStartTrackingTouch(SeekBar seekBar) {
-
-        }
-
-        @Override
-        public void onStopTrackingTouch(SeekBar seekBar) {
-
-        }
+        volume_seekbar.setOnSeekBarChangeListener(new SeekBarChangedListener(getActivity()));
     }
 
     @Override

@@ -64,7 +64,7 @@ public class DiscoveryListener implements NsdManager.DiscoveryListener {
     public void onServiceLost(NsdServiceInfo service) {
         // When the network service is no longer available.
         // Internal bookkeeping code goes here.
-        availableRobots.remove(service.getHost().toString());
+        availableRobots.remove(service.getServiceName().toString());
         if (availableRobots.size() == 0) {
             availableRobots.add(DEFAULT_ROBOT_ENTRY);
         }

@@ -24,26 +24,9 @@ public class MoveFullscreenActivity extends AppCompatActivity {
         JoystickView move_joystick = findViewById(R.id.movement_joystick);
         JoystickView orientation_joystick = findViewById(R.id.orientation_joystick);
 
-        move_joystick.setOnMoveListener(new JoystickView.OnMoveListener() {
-            private JoystickCombinator jsc = JoystickCombinator.getInstance();
+        move_joystick.setOnMoveListener(new MoveJoystickChangedListener());
 
-            @Override
-            public void onMove(int angle, int strength) {
-                jsc.setX((float) Math.sin(Math.toRadians(angle)) * (strength / 100.f));
-                jsc.setY((float) -Math.cos(Math.toRadians(angle)) * (strength / 100.f));
-            }
-        });
-
-        orientation_joystick.setOnMoveListener(new JoystickView.OnMoveListener() {
-            private JoystickCombinator jsc = JoystickCombinator.getInstance();
-
-            @Override
-            public void onMove(int angle, int strength) {
-                int theta = angle != 0 ? 1 : -1;
-
-                jsc.setTheta(theta * (strength / 100.f));
-            }
-        });
+        orientation_joystick.setOnMoveListener(new OrientationJoystickChangedListener());
     }
 
     @Override

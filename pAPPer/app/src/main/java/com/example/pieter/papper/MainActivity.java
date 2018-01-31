@@ -162,37 +162,6 @@ public class MainActivity extends AppCompatActivity implements OnConnectionChang
         }
     }
 
-
-    // fragmentpager, since FragmentStatePagerAdapter is for more and heavier tabs
-    private class TabPagerAdapter extends FragmentPagerAdapter {
-        int nTabs;
-
-        public TabPagerAdapter(FragmentManager fm, int nTabs) {
-            super(fm);
-            this.nTabs = nTabs;
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            System.out.println("NEXT FRAGMENT");
-            switch(position) {
-                case 0:
-                    return new TalkFragment();
-                case 1:
-                    return new MoveFragment();
-                case 2:
-                    return new DanceFragment();
-                default:
-                    return null;
-            }
-        }
-
-        @Override
-        public int getCount() {
-            return nTabs;
-        }
-    }
-
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.actions, menu);
