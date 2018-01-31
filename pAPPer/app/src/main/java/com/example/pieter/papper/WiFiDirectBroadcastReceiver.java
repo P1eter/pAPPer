@@ -9,7 +9,6 @@ import android.net.wifi.p2p.WifiP2pConfig;
 import android.net.wifi.p2p.WifiP2pDevice;
 import android.net.wifi.p2p.WifiP2pDeviceList;
 import android.net.wifi.p2p.WifiP2pManager;
-import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -32,25 +31,6 @@ public class WiFiDirectBroadcastReceiver extends BroadcastReceiver {
 
             peers.clear();
             peers.addAll(peerList.getDeviceList());
-
-////            List<WifiP2pDevice> refreshedPeers = peerList.getDeviceList();
-//            if (!peerList.getDeviceList().equals(peers)) {
-//                peers.clear();
-//                peers.addAll(peerList.getDeviceList());
-//
-////                // If an AdapterView is backed by this data, notify it
-////                // of the change. For instance, if you have a ListView of
-////                // available peers, trigger an update.
-////                ((WiFiPeerListAdapter) getListAdapter()).notifyDataSetChanged();
-//
-//                // Perform any other updates needed based on the new list of
-//                // peers connected to the Wi-Fi P2P network.
-//            }
-//
-//            if (peers.size() == 0) {
-////                Log.d(MainActivity.TAG, "No devices found");
-//                return;
-//            }
         }
     };
 

@@ -1,7 +1,6 @@
 package com.example.pieter.papper;
 
 import android.content.pm.ActivityInfo;
-import android.net.Network;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,8 +10,6 @@ import android.view.WindowManager;
 import io.github.controlwear.virtual.joystick.android.JoystickView;
 
 public class MoveFullscreenActivity extends AppCompatActivity {
-    private NetworkSender networkSender = NetworkSender.getInstance();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

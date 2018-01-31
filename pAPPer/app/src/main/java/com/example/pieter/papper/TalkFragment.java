@@ -7,11 +7,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Switch;
-import android.widget.TextView;
 
 
 /**
@@ -33,7 +31,6 @@ public class TalkFragment extends Fragment implements View.OnClickListener {
         super.onViewCreated(view, savedInstanceState);
 
         view.findViewById(R.id.talk_button).setOnClickListener(this);
-//        view.findViewById(R.id.animated_speech_switch).setOnClickListener(this);
 
         SeekBar volume_seekbar = view.findViewById(R.id.volume_seekBar);
         volume_seekbar.setOnSeekBarChangeListener(new SeekBarChangedListener(getActivity()));

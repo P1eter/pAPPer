@@ -1,7 +1,6 @@
 package com.example.pieter.papper;
 
 import android.app.Activity;
-import android.content.Context;
 import android.widget.SeekBar;
 import android.widget.TextView;
 

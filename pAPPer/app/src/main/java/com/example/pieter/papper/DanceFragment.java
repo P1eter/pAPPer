@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Spinner;
 
 
 /**
@@ -27,7 +26,6 @@ public class DanceFragment extends Fragment implements View.OnClickListener {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-//        view.findViewById(R.id.dance_button).setOnClickListener(this);
         view.findViewById(R.id.dance_headbang_button).setOnClickListener(this);
         view.findViewById(R.id.dance_vacuum_button).setOnClickListener(this);
         view.findViewById(R.id.dance_picture_button).setOnClickListener(this);
@@ -39,10 +37,6 @@ public class DanceFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-//            case R.id.dance_button:
-//                Spinner dance_spinner = getView().findViewById(R.id.pick_dance_spinner);
-//                networkSender.dance(dance_spinner.getSelectedItem().toString());
-//                break;
             case R.id.dance_vacuum_button:
                 networkSender.dance("vacuum");
                 break;

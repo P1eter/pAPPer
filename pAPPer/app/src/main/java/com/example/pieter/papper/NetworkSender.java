@@ -1,15 +1,11 @@
 package com.example.pieter.papper;
 
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import java.io.BufferedReader;
-import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.net.ConnectException;
 import java.net.Socket;
 import java.util.PriorityQueue;
 
@@ -111,7 +107,6 @@ public class NetworkSender implements Runnable {
         System.out.println("Creating socket to '" + host + "' on port " + port);
 
         if (connectionOpen && !closeConnection()) {
-//            connectionOpen = true;
             return false;
         }
 
@@ -145,25 +140,18 @@ public class NetworkSender implements Runnable {
             return true;
         } catch (IOException e) {
             Log.e(TAG, "Failed to close socket", e);
-//            connectionOpen = true;
             return false;
         }
     }
 
     private void getMessages() {
         try {
-//            Log.d(TAG, "Waiting for response...");
-//            String data = in.readLine();
-//            Log.d(TAG, data);
             if (in.ready() && in.readLine() == null) {
                 Log.d(TAG, "response: null");
-//                connectionOpen = false;
             }
         } catch (IOException e) {
-//            connectionOpen = false;
             e.printStackTrace();
         } catch (NullPointerException e) {
-//            connectionOpen = false;
             e.printStackTrace();
         }
     }
@@ -179,56 +167,6 @@ public class NetworkSender implements Runnable {
             return false;
         }
         return true;
-
-//        catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (NullPointerException e) {
-//            e.printStackTrace();
-//        }
-
-//        if (connectionOpen) {
-////            getMessages();
-//            try {
-//                if (in.ready() && in.readLine() == null) {
-//                    Log.d(TAG, "response: null");
-//                    connectionOpen = false;
-//                }
-//            } catch (IOException e) {
-//                connectionOpen = false;
-//                e.printStackTrace();
-//            } catch (NullPointerException e) {
-//                connectionOpen = false;
-//                e.printStackTrace();
-//            }
-//        } else {
-//            return false;
-//        }
-//        return true;
-
-//        try {
-//            Log.d(TAG, "1");
-//            if (in.readLine() == null) {
-//                Log.d(TAG, "2");
-//                throw new IOException();
-//            }
-//        } catch (IOException e) {
-//            // Connection closed
-//            closeConnection();
-//            return false;
-//        }
-//        Log.d(TAG, "3");
-
-//        try {
-//            Log.d(TAG, "checkConnection1(): " + in.ready());
-//            while (in.ready()) {
-//                Log.d(TAG, "readline: " + in.readLine());
-//            }
-//            Log.d(TAG, "checkConnection2(): " + in.ready());
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            return false;
-//        }
-
     }
 
     public void setPort(int port) {

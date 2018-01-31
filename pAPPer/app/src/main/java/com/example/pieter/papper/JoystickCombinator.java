@@ -1,13 +1,10 @@
 package com.example.pieter.papper;
 
-import android.util.Log;
-
 /**
  * Created by pieter on 29-1-18.
  */
 
 public class JoystickCombinator {
-    private final String TAG = "JoystickCombinator";
     private NetworkSender networkSender = NetworkSender.getInstance();
     private static JoystickCombinator instance;
     private float x = 0.f;
@@ -46,7 +43,6 @@ public class JoystickCombinator {
     }
 
     private void update() {
-//        Log.d(TAG, "update(): " + x + " " + y + " " + theta);
         networkSender.move(this.x, this.y, this.theta);
     }
 }

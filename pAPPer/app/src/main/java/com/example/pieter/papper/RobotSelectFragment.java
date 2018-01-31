@@ -5,17 +5,11 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.Spinner;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,8 +20,6 @@ public class RobotSelectFragment extends DialogFragment implements View.OnClickL
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_robot_select, container, false);
@@ -77,19 +69,5 @@ public class RobotSelectFragment extends DialogFragment implements View.OnClickL
         }
 
         getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
-
-
-
-//        if (!networkSender.isRunning()) {
-//            Log.d(TAG, "starting new thread");
-//            new Thread(networkSender).start();
-//        } else {
-//            Log.d(TAG, "opening new connection");
-//            networkSender.closeConnection();
-//            networkSender.run();
-////            networkSender.openConnection();
-//        }
-
-
     }
 }
