@@ -38,3 +38,7 @@ I implemented the full screen activity for the movement joysticks. I also connec
 
 # day 12
 Today I did a lot of bugfixing, design improvements, and I added an autonomous life button.
+
+# day 13
+Today I added the option to do animated speech instead of normal speech. I also moved every nested class to its own file, removed unused (commented) code and imports, fixed some style issues, removed excess use of logging statements and fixed some bugs.
+
