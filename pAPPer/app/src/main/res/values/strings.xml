@@ -7,7 +7,7 @@
     <string name="talk_button_text">Talk!</string>
     <string name="talk_edittext_hint">Write anything</string>
     <string name="options_menu_title">options</string>
-    <string name="talk_fragment_explanation_message">Write your own message, or pick a premade message below!</string>
+    <string name="talk_fragment_explanation_message">Write your own message!</string>
     <string name="connect_button_text">Connect</string>
     <string name="default_robot_spinner_entry">No available robots</string>
     <string name="volume_textview_text">Volume: %1$d%2$s</string>
@@ -21,7 +21,7 @@
     <string name="rugby_button">rugby</string>
     <string name="autonomous_life_switch">Autonomous Life</string>
     <string name="wake_up_switch">Wake up</string>
-    <string name="to_joystick_activity_button">start moving</string>
+    <string name="to_joystick_activity_button">move the robot yourself!</string>
     <string name="disconnect_button_text">disconnect</string>
     <string name="volume_textview_default">Volume: 20%</string>
     <string name="animated_speech_textview">Animated speech:</string>

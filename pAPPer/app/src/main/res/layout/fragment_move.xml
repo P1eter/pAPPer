@@ -10,46 +10,61 @@
 
     <Switch
         android:id="@+id/autonomous_life_switch"
-        android:layout_width="201dp"
-        android:layout_height="55dp"
+        android:layout_width="200dp"
+        android:layout_height="42dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="76dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:splitTrack="false"
         android:text="@string/autonomous_life_switch"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textAppearance="@style/TextAppearance.AppCompat"
         android:thumbTint="@color/colorPrimaryDark"
         android:trackTint="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.047"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/to_fullscreen_move_button" />
+        app:layout_constraintTop_toBottomOf="@+id/stiffness_onoff_switch" />
 
     <Switch
         android:id="@+id/stiffness_onoff_switch"
-        android:layout_width="134dp"
-        android:layout_height="55dp"
+        android:layout_width="200dp"
+        android:layout_height="42dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="36dp"
         android:splitTrack="false"
         android:text="@string/wake_up_switch"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textAppearance="@style/TextAppearance.AppCompat"
         android:thumbTint="@color/colorPrimaryDark"
         android:trackTint="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.034"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <Button
         android:id="@+id/to_fullscreen_move_button"
-        android:layout_width="92dp"
-        android:layout_height="91dp"
+        style="@android:style/Widget.Holo.Button"
+        android:layout_width="200dp"
+        android:layout_height="89dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="36dp"
         android:backgroundTint="@color/colorPrimary"
         android:text="@string/to_joystick_activity_button"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.061"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/stiffness_onoff_switch" />
+        app:layout_constraintTop_toBottomOf="@+id/autonomous_life_switch" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="287dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="28dp"
+        android:text="Wake the robot up, activate 'Autonomous Life' or control the robot yourself!"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>
