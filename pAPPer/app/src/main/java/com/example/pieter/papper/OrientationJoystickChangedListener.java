@@ -10,7 +10,7 @@ package com.example.pieter.papper;
 import io.github.controlwear.virtual.joystick.android.JoystickView;
 
 
-public class OrientationJoystickChangedListener implements JoystickView.OnMoveListener {
+class OrientationJoystickChangedListener implements JoystickView.OnMoveListener {
     private final JoystickCombinator jsc = JoystickCombinator.getInstance();
 
     @Override

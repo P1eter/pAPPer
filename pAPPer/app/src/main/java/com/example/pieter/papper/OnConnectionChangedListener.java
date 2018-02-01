@@ -6,6 +6,6 @@
 
 package com.example.pieter.papper;
 
-public interface OnConnectionChangedListener {
+interface OnConnectionChangedListener {
     void onConnectionChanged(boolean connected);
 }

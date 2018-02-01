@@ -12,8 +12,8 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 
-public class SeekBarChangedListener implements SeekBar.OnSeekBarChangeListener {
-    private Activity activity;
+class SeekBarChangedListener implements SeekBar.OnSeekBarChangeListener {
+    private final Activity activity;
 
     SeekBarChangedListener(Activity activity) {
         this.activity = activity;

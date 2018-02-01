@@ -9,7 +9,7 @@ package com.example.pieter.papper;
 
 
 class JoystickCombinator {
-    private NetworkSender networkSender = NetworkSender.getInstance();
+    private final NetworkSender networkSender = NetworkSender.getInstance();
     private static JoystickCombinator instance;
     private float x = 0.f;
     private float y = 0.f;

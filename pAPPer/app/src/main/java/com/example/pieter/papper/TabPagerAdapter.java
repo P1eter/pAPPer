@@ -12,8 +12,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 
-public class TabPagerAdapter extends FragmentPagerAdapter {
-    private int nTabs;
+class TabPagerAdapter extends FragmentPagerAdapter {
+    private final int nTabs;
 
     TabPagerAdapter(FragmentManager fm, int nTabs) {
         super(fm);

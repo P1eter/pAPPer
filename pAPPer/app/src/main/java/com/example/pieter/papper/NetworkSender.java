@@ -18,7 +18,7 @@ import java.util.PriorityQueue;
 import static java.lang.Thread.sleep;
 
 
-public class NetworkSender implements Runnable {
+class NetworkSender implements Runnable {
     private static final String TAG = "NetworkSender";
     private static NetworkSender instance;
     private Socket socket;
@@ -27,7 +27,7 @@ public class NetworkSender implements Runnable {
     private boolean connectionOpen = false;
     private int port;
     private String host;
-    private PriorityQueue<String> sendQueue = new PriorityQueue<>();
+    private final PriorityQueue<String> sendQueue = new PriorityQueue<>();
     private OnConnectionChangedListener onConnectionChangedListener;
 
     private NetworkSender() {

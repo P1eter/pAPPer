@@ -60,7 +60,7 @@
         android:layout_marginStart="56dp"
         android:layout_marginTop="32dp"
         android:gravity="center"
-        android:text="Movement"
+        android:text="@string/joystick_movement_textview"
         app:layout_constraintEnd_toStartOf="@+id/orientation_joystick_textview"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
@@ -74,7 +74,7 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="32dp"
         android:gravity="center"
-        android:text="Orientation"
+        android:text="@string/joystick_orientation_textview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/move_joystick_textview"
         app:layout_constraintTop_toTopOf="parent" />

@@ -14,12 +14,12 @@ import android.util.Log;
 import java.util.ArrayList;
 
 
-public class DiscoveryListener implements NsdManager.DiscoveryListener {
+class DiscoveryListener implements NsdManager.DiscoveryListener {
     private static final String TAG = "DiscoveryListener";
     private static final String SERVICE_TYPE = "_naoqi._tcp";
     private static String DEFAULT_ROBOT_ENTRY;
     private NsdManager mNsdManager;
-    ArrayList<String> availableRobots = new ArrayList<>();
+    final ArrayList<String> availableRobots = new ArrayList<>();
 
     DiscoveryListener(Context baseContext) {
         DEFAULT_ROBOT_ENTRY = baseContext.getString(R.string.default_robot_spinner_entry);

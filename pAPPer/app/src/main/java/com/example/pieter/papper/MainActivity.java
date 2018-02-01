@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements OnConnectionChang
         fragment.show(ft, "dialog");
     }
 
-    public void initializeDiscoveryListener() {
+    private void initializeDiscoveryListener() {
         mDiscoveryListener = new DiscoveryListener(getBaseContext());
     }
 }

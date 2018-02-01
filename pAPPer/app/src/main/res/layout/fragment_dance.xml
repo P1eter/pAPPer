@@ -38,7 +38,7 @@
                     android:layout_width="154dp"
                     android:layout_height="154dp"
                     android:backgroundTint="@color/colorPrimary"
-                    android:text="headbang"
+                    android:text="@string/headbang_button"
                     tools:layout_editor_absoluteX="8dp"
                     tools:layout_editor_absoluteY="8dp" />
 
@@ -47,7 +47,7 @@
                     android:layout_width="154dp"
                     android:layout_height="154dp"
                     android:backgroundTint="@color/colorPrimary"
-                    android:text="vacuum" />
+                    android:text="@string/vacuum_button" />
             </TableRow>
 
             <TableRow
@@ -59,7 +59,7 @@
                     android:layout_width="154dp"
                     android:layout_height="154dp"
                     android:backgroundTint="@color/colorPrimary"
-                    android:text="take picture"
+                    android:text="@string/take_picture_button"
                     tools:layout_editor_absoluteX="16dp"
                     tools:layout_editor_absoluteY="42dp" />
 
@@ -68,7 +68,7 @@
                     android:layout_width="154dp"
                     android:layout_height="154dp"
                     android:backgroundTint="@color/colorPrimary"
-                    android:text="saxophone" />
+                    android:text="@string/saxophone_button" />
             </TableRow>
 
             <TableRow
@@ -80,7 +80,7 @@
                     android:layout_width="154dp"
                     android:layout_height="154dp"
                     android:backgroundTint="@color/colorPrimary"
-                    android:text="guitar"
+                    android:text="@string/guitar_button"
                     tools:layout_editor_absoluteX="16dp"
                     tools:layout_editor_absoluteY="42dp" />
 
@@ -89,7 +89,7 @@
                     android:layout_width="154dp"
                     android:layout_height="154dp"
                     android:backgroundTint="@color/colorPrimary"
-                    android:text="rugby" />
+                    android:text="@string/rugby_button" />
             </TableRow>
         </TableLayout>
 

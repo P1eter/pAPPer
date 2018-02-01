@@ -57,7 +57,7 @@ public class MoveFullscreenActivity extends AppCompatActivity {
         }
     }
 
-    public void closeFullScreen(View view) {
+    public void closeFullScreen(@SuppressWarnings("unused") View view) {
         finish();
     }
 }
