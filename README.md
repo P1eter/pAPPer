@@ -17,7 +17,7 @@ NOTE: the two missing points are "writing tests" and "Write Short Units of Code"
       <img src="https://github.com/P1eter/pAPPer/blob/master/doc/move.png?raw=true" width="300">
       <img src="https://github.com/P1eter/pAPPer/blob/master/doc/dance.png?raw=true" width="300">
       <img src="https://github.com/P1eter/pAPPer/blob/master/doc/connect.png?raw=true" width="300">
-      <img src="https://github.com/P1eter/pAPPer/blob/master/doc/joysticks.png?raw=true" width="300">
+      <img src="https://github.com/P1eter/pAPPer/blob/master/doc/joysticks.png?raw=true" width="600">
     </td>
   </tr>
 </table>
