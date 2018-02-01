@@ -13,7 +13,7 @@ This is an app that makes it easy to let the Pepper robot do basic movements and
       <img src="https://github.com/P1eter/pAPPer/blob/master/doc/move.png?raw=true" width="300">
       <img src="https://github.com/P1eter/pAPPer/blob/master/doc/dance.png?raw=true" width="300">
       <img src="https://github.com/P1eter/pAPPer/blob/master/doc/connect.png?raw=true" width="300">
-      <img src="https://github.com/P1eter/pAPPer/blob/master/doc/joysticks.png?raw=true" width="300">
+      <img src="https://github.com/P1eter/pAPPer/blob/master/doc/joysticks.png?raw=true" width="600">
     </td>
   </tr>
 </table>
