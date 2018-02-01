@@ -22,7 +22,6 @@ class SeekBarChangedListener implements SeekBar.OnSeekBarChangeListener {
     @Override
     public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
         TextView volumeTextview = activity.findViewById(R.id.volume_textview);
-//        volumeTextview.setText("Volume: " + String.valueOf(i * 10) + "%");
         volumeTextview.setText(activity.getString(R.string.volume_textview_text, i * 10, "%"));
     }
 

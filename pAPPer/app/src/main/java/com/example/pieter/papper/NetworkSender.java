@@ -112,7 +112,6 @@ class NetworkSender implements Runnable {
             // invoke callback method notifying an opened connection
             onConnectionChangedListener.onConnectionChanged(true);
         } catch (IOException e) {
-            // TODO: make toast
             Log.e(TAG, "Failed to open connection", e);
             return false;
         }

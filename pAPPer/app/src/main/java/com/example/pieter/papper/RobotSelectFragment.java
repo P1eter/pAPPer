@@ -56,10 +56,6 @@ public class RobotSelectFragment extends DialogFragment implements View.OnClickL
     @Override
     public void onClick(View view) {
         NetworkSender networkSender = NetworkSender.getInstance();
-// TODO: FIX AND TEST THIS
-//        if (networkSender.isRunning()) {
-//            networkSender.closeConnection();
-//        }
 
         switch (view.getId()) {
             case R.id.connect_button:
