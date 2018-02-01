@@ -21,3 +21,6 @@ https://stackoverflow.com/questions/541487/implements-runnable-vs-extends-thread
 
 // naoqi talk interface
 http://doc.aldebaran.com/1-14/dev/python/making_nao_speak.html
+
+// full screen mode
+https://developer.android.com/training/system-ui/immersive.html
