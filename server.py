@@ -69,9 +69,13 @@ class Server():
     def wakeUp(self, data):
         self.motion.wakeUp() if data == "1" else self.motion.rest()
 
-    def playMusic(self):
+    def playMusicSaxophone(self):
         time.sleep(1.7)
         self.ap.playFile("/home/nao/sounds/epicsax.ogg")
+
+    def playMusicTakePicture(self):
+        time.sleep(1.8)
+        self.ap.playFile("/home/nao/sounds/camera1.ogg")
 
     def dance(self, dance):
         try :
@@ -84,7 +88,9 @@ class Server():
                 self.motion.wakeUp()
 
             if dance == "saxophone":
-                Thread(target = self.playMusic).start()
+                Thread(target = self.playMusicSaxophone).start()
+            elif dance == "take_picture":
+                Thread(target = self.playMusicTakePicture).start()
 
             # execute interpolation
             self.motion.angleInterpolationBezier(variables["names"], variables["times"], variables["keys"])
