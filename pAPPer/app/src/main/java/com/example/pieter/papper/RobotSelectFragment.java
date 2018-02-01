@@ -16,6 +16,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import java.util.ArrayList;
+
 
 public class RobotSelectFragment extends DialogFragment implements View.OnClickListener {
     private static final int PORT = 1717;
@@ -37,9 +39,15 @@ public class RobotSelectFragment extends DialogFragment implements View.OnClickL
         Bundle bundle = getArguments();
         Spinner robotSpinner = view.findViewById(R.id.robot_select_spinner);
 
+        ArrayList<String> robotList = bundle.getStringArrayList("robots");
+        if (robotList == null) {
+            robotList = new ArrayList<>();
+            robotList.add(getString(R.string.default_robot_spinner_entry));
+        }
+
         // give the adapter a list of all available services to connect to
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),
-                android.R.layout.simple_spinner_item, bundle.getStringArrayList("robots"));
+                android.R.layout.simple_spinner_item, robotList);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         robotSpinner.setAdapter(adapter);
@@ -60,7 +68,7 @@ public class RobotSelectFragment extends DialogFragment implements View.OnClickL
                 // default value
                 String host = "Pepper";
 
-                if (!robotSpinner.getSelectedItem().equals("No available robots")) {
+                if (!robotSpinner.getSelectedItem().equals(getString(R.string.default_robot_spinner_entry))) {
                     host = robotSpinner.getSelectedItem().toString();
                 }
 
@@ -69,8 +77,6 @@ public class RobotSelectFragment extends DialogFragment implements View.OnClickL
                 new Thread(networkSender).start();
                 break;
             case R.id.disconnect_button:
-                // TODO: is this comment still good?
-                // disconnection already happened
                 networkSender.closeConnection();
                 break;
         }
@@ -78,4 +84,6 @@ public class RobotSelectFragment extends DialogFragment implements View.OnClickL
         // close this dialog fragment
         getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
     }
+
+
 }

@@ -12,6 +12,8 @@
     <string name="talk_fragment_explanation_message">Write your own message, or pick a premade message below!</string>
     <string name="connect_button_text">Connect</string>
     <string name="dance_button_text">Dance!</string>
+    <string name="default_robot_spinner_entry">No available robots</string>
+    <string name="volume_textview_text">Volume: %1$d%2$s</string>
 
     <string-array name="dance_list">
         <item>headbang</item>

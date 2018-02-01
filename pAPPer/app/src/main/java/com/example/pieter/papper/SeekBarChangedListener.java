@@ -15,14 +15,15 @@ import android.widget.TextView;
 public class SeekBarChangedListener implements SeekBar.OnSeekBarChangeListener {
     private Activity activity;
 
-    public SeekBarChangedListener(Activity activity) {
+    SeekBarChangedListener(Activity activity) {
         this.activity = activity;
     }
 
     @Override
     public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
         TextView volumeTextview = activity.findViewById(R.id.volume_textview);
-        volumeTextview.setText("Volume: " + String.valueOf(i * 10) + "%");
+//        volumeTextview.setText("Volume: " + String.valueOf(i * 10) + "%");
+        volumeTextview.setText(activity.getString(R.string.volume_textview_text, i * 10, "%"));
     }
 
     @Override

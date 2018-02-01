@@ -34,7 +34,7 @@ public class NetworkSender implements Runnable {
         // empty private constructor of singleton class
     }
 
-    public static NetworkSender getInstance() {
+    static NetworkSender getInstance() {
         if (instance == null) {
             instance = new NetworkSender();
         }
@@ -76,27 +76,27 @@ public class NetworkSender implements Runnable {
         }
     }
 
-    public void talk(String statement) {
+    void talk(String statement) {
         sendQueue.add("talk " + statement);
     }
 
-    public void move(float x, float y, float theta) {
+    void move(float x, float y, float theta) {
         sendQueue.add("move " + x + " " + y + " " + theta);
     }
 
-    public void wakeUp(boolean wakeOrSleep) {
+    void wakeUp(boolean wakeOrSleep) {
         sendQueue.add("wake " + (wakeOrSleep ? 1 : 0));
     }
 
-    public void dance(String dance) {
+    void dance(String dance) {
         sendQueue.add("danc " + dance);
     }
 
-    public void autonomousLife(boolean value) {
+    void autonomousLife(boolean value) {
         sendQueue.add("autl " + (value ? 1 : 0));
     }
 
-    public boolean openConnection() {
+    private boolean openConnection() {
         // make sure previous connection is closed before opening a new one
         if (connectionOpen && !closeConnection()) {
             return false;
@@ -120,7 +120,7 @@ public class NetworkSender implements Runnable {
         return true;
     }
 
-    public boolean closeConnection() {
+    boolean closeConnection() {
         // check if connection might be closed already by host
         if (!connectionOpen) {
             return true;
@@ -161,19 +161,15 @@ public class NetworkSender implements Runnable {
         return true;
     }
 
-    public void setPort(int port) {
+    void setPort(int port) {
         this.port = port;
     }
 
-    public void setHost(String host) {
+    void setHost(String host) {
         this.host = host;
     }
 
-    public void setCallback(OnConnectionChangedListener c) {
+    void setCallback(OnConnectionChangedListener c) {
         this.onConnectionChangedListener = c;
-    }
-
-    public boolean isRunning() {
-        return connectionOpen;
     }
 }

@@ -17,15 +17,20 @@ import java.util.ArrayList;
 public class DiscoveryListener implements NsdManager.DiscoveryListener {
     private static final String TAG = "DiscoveryListener";
     private static final String SERVICE_TYPE = "_naoqi._tcp";
-    private static final String DEFAULT_ROBOT_ENTRY = "No available robots";
+    private static String DEFAULT_ROBOT_ENTRY;
     private NsdManager mNsdManager;
-    public ArrayList<String> availableRobots = new ArrayList<>();
+    ArrayList<String> availableRobots = new ArrayList<>();
 
     DiscoveryListener(Context baseContext) {
+        DEFAULT_ROBOT_ENTRY = baseContext.getString(R.string.default_robot_spinner_entry);
         availableRobots.add(DEFAULT_ROBOT_ENTRY);
 
-        mNsdManager = (NsdManager) baseContext.getSystemService(Context.NSD_SERVICE);
-        mNsdManager.discoverServices(SERVICE_TYPE, NsdManager.PROTOCOL_DNS_SD, this);
+        try {
+            mNsdManager = (NsdManager) baseContext.getSystemService(Context.NSD_SERVICE);
+            mNsdManager.discoverServices(SERVICE_TYPE, NsdManager.PROTOCOL_DNS_SD, this);
+        } catch (NullPointerException e) {
+            Log.e(TAG, "NsdManager not found", e);
+        }
     }
 
     @Override
@@ -62,12 +67,16 @@ public class DiscoveryListener implements NsdManager.DiscoveryListener {
     @Override
     public void onStartDiscoveryFailed(String serviceType, int errorCode) {
         Log.e(TAG, "Discovery failed: Error code:" + errorCode);
-        mNsdManager.stopServiceDiscovery(this);
+        if (mNsdManager != null) {
+            mNsdManager.stopServiceDiscovery(this);
+        }
     }
 
     @Override
     public void onStopDiscoveryFailed(String serviceType, int errorCode) {
         Log.e(TAG, "Discovery failed: Error code:" + errorCode);
-        mNsdManager.stopServiceDiscovery(this);
+        if (mNsdManager != null) {
+            mNsdManager.stopServiceDiscovery(this);
+        }
     }
 }

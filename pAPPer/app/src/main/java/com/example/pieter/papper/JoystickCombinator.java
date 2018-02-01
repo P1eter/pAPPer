@@ -8,7 +8,7 @@
 package com.example.pieter.papper;
 
 
-public class JoystickCombinator {
+class JoystickCombinator {
     private NetworkSender networkSender = NetworkSender.getInstance();
     private static JoystickCombinator instance;
     private float x = 0.f;
@@ -19,7 +19,7 @@ public class JoystickCombinator {
         // empty private constructor for singleton class
     }
 
-    public static JoystickCombinator getInstance() {
+    static JoystickCombinator getInstance() {
         if (instance == null) {
             instance = new JoystickCombinator();
         }
@@ -29,7 +29,7 @@ public class JoystickCombinator {
     /**
      * Sets the speed in the x direction (forward) and sends value to the robot.
      */
-    public void setX(float x) {
+    void setX(float x) {
         if (this.x != x) {
             this.x = x;
             this.update();
@@ -39,7 +39,7 @@ public class JoystickCombinator {
     /**
      * Sets the speed in the y direction (left) and sends value to the robot.
      */
-    public void setY(float y) {
+    void setY(float y) {
         if (this.y != y) {
             this.y = y;
             this.update();
@@ -49,7 +49,7 @@ public class JoystickCombinator {
     /**
      * Sets the turning speed (counter clockwise) and sends value to the robot.
      */
-    public void setTheta(float theta) {
+    void setTheta(float theta) {
         if (this.theta != theta) {
             this.theta = theta;
             this.update();
