@@ -21,10 +21,10 @@ import android.view.MenuItem;
 
 import static java.lang.Math.min;
 
+
 public class MainActivity extends AppCompatActivity implements OnConnectionChangedListener {
     private final String[] TABTEXTS = {"Talk", "Walk", "Dance"};
     private final NetworkSender networkSender = NetworkSender.getInstance();
-//    private Toolbar toolbar;
     private MenuItem connectIcon;
     private DiscoveryListener mDiscoveryListener;
 
@@ -37,14 +37,12 @@ public class MainActivity extends AppCompatActivity implements OnConnectionChang
         setSupportActionBar(toolbar);
 
         makeTabs();
-
         initializeDiscoveryListener();
     }
 
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
