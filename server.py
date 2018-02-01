@@ -77,10 +77,6 @@ class Server():
                 print "waking pepper up"
                 self.motion.wakeUp()
 
-            # TODO: fix
-            if dance == "saxophone":
-                self.ap.playFile("/home/nao/sounds/epicsax.ogg")
-
             # execute interpolation
             self.motion.angleInterpolationBezier(variables["names"], variables["times"], variables["keys"])
         except Exception, e:
