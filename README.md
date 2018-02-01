@@ -25,3 +25,6 @@ NOTE: the two missing points are "writing tests" and "Write Short Units of Code"
 
 ## Copyright
 You may copy, distribute and modify this software, provided that you publish it under the Lesser General Public License v2.1.
+
+## External sources
+For external sources, see the [references.txt](references.txt) file.
