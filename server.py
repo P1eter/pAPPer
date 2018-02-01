@@ -1,6 +1,8 @@
 import socket
 import sys
+import time
 from naoqi import ALProxy
+from threading import Thread
 
 class Server():
     def __init__(self):
@@ -67,6 +69,10 @@ class Server():
     def wakeUp(self, data):
         self.motion.wakeUp() if data == "1" else self.motion.rest()
 
+    def playMusic(self):
+        time.sleep(1.7)
+        self.ap.playFile("/home/nao/sounds/epicsax.ogg")
+
     def dance(self, dance):
         try :
             # get interpolation data from dance files
@@ -76,6 +82,9 @@ class Server():
             if not self.motion.robotIsWakeUp():
                 print "waking pepper up"
                 self.motion.wakeUp()
+
+            if dance == "saxophone":
+                Thread(target = self.playMusic).start()
 
             # execute interpolation
             self.motion.angleInterpolationBezier(variables["names"], variables["times"], variables["keys"])
