@@ -9,7 +9,7 @@ class Server():
 
         # make proxies to naoqi
         self.tts = ALProxy("ALTextToSpeech", "localhost", 9559)
-        self.move = ALProxy("ALMotion", "localhost", 9559)
+        self.motion = ALProxy("ALMotion", "localhost", 9559)
         self.autl = ALProxy("ALAutonomousLife", "localhost", 9559)
         self.ap = ALProxy("ALAudioPlayer", "localhost", 9559)
         self.ansp = ALProxy("ALAnimatedSpeech", "localhost", 9559)
@@ -22,7 +22,7 @@ class Server():
         self.s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         print 'Socket created'
  
-    def startServer():
+    def startServer(self):
         # bind socket to host and port
         try:
             self.s.bind((self.HOST, self.PORT))
@@ -55,17 +55,17 @@ class Server():
         x, y, theta = data.split(" ")
         x, y, theta = float(x), float(y), float(theta)
 
-        if not self.move.robotIsWakeUp():
+        if not self.motion.robotIsWakeUp():
             print "waking Pepper up"
-            self.move.wakeUp()
+            self.motion.wakeUp()
 
         # check for valid parameters
         if x <= 1 and x >= -1 and y <= 1 and y >= -1 and theta <= 1 and theta > -1:
-            self.move.moveToward(float(x), float(y), float(theta))
+            self.motion.moveToward(float(x), float(y), float(theta))
             print "moving:", data
 
     def wakeUp(self, data):
-        self.move.wakeUp() if data == "1" else self.move.rest()
+        self.motion.wakeUp() if data == "1" else self.motion.rest()
 
     def dance(self, dance):
         try :
@@ -73,16 +73,16 @@ class Server():
             variables = {}
             execfile("dances/" + dance + ".py", variables)
 
-            if not self.move.robotIsWakeUp():
+            if not self.motion.robotIsWakeUp():
                 print "waking pepper up"
-                self.move.wakeUp()
+                self.motion.wakeUp()
 
             # TODO: fix
             if dance == "saxophone":
                 self.ap.playFile("/home/nao/sounds/epicsax.ogg")
 
             # execute interpolation
-            self.move.angleInterpolationBezier(variables["names"], variables["times"], variables["keys"])
+            self.motion.angleInterpolationBezier(variables["names"], variables["times"], variables["keys"])
         except Exception, e:
             print e
 
