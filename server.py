@@ -77,6 +77,10 @@ class Server():
         time.sleep(1.8)
         self.ap.playFile("/home/nao/sounds/camera1.ogg")
 
+    def playMusicVacuum(self):
+        time.sleep(1)
+        self.ap.playFile("/home/nao/sounds/vacuum1.ogg")
+
     def dance(self, dance):
         try :
             # get interpolation data from dance files
@@ -91,6 +95,8 @@ class Server():
                 Thread(target = self.playMusicSaxophone).start()
             elif dance == "take_picture":
                 Thread(target = self.playMusicTakePicture).start()
+            elif dance == "vacuum":
+                Thread(target = self.playMusicVacuum).start()
 
             # execute interpolation
             self.motion.angleInterpolationBezier(variables["names"], variables["times"], variables["keys"])
