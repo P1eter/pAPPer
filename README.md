@@ -4,6 +4,10 @@ By Pieter Kronemeijer
 
 This is an app that makes it easy to let the Pepper robot do basic movements and talking, without needing any coding experience. This is exceptionally useful for doing demonstrations with this robot, since it allows the crowd to play with an actual robot.
 
+## Better code hub
+[![BCH compliance](https://bettercodehub.com/edge/badge/P1eter/pAPPer?branch=master)](https://bettercodehub.com/)
+
+NOTE: the two missing points are "writing tests" and "Write Short Units of Code". The latter one failed due to the dance files containing the interpolation of the joints.
 
 ## Screenshots
 <table>
