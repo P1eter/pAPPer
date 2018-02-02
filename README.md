@@ -28,3 +28,6 @@ You may copy, distribute and modify this software, provided that you publish it 
 
 ## External sources
 For external sources, see the [references.txt](references.txt) file.
+
+## Explanation video
+You can find a video of me explaining the app [here](https://youtu.be/k74t3WVZMIo).
