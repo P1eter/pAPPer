@@ -30,4 +30,5 @@ You may copy, distribute and modify this software, provided that you publish it 
 For external sources, see the [references.txt](references.txt) file.
 
 ## Explanation video
-You can find a video of me explaining the app [here](https://youtu.be/k74t3WVZMIo).
+You can find a video of me explaining the app [here](https://youtu.be/k74t3WVZMIo).   
+For a video of how the robot moves, click [here](https://youtu.be/jxz_R7yVfKk)
