@@ -1,0 +1,15 @@
+VIDEO SCRIPT
+
+Hallo iedereen, ik ben Pieter Kronemeijer, en ik heb een app gemaakt voor de Pepper robot. Met deze app kun je de robot gemakkelijk laten bewegen en dingen laten uitspreken, zonder ervaring te hebben met coderen. Dit is vooral handig bij bijvoorbeeld demonstraties met de robot; voor veel mensen is een robot iets heel ingewikkelds waar je veel computer kennis voor nodig hebt, maar met deze app kunnen die mensen ook zelf met de robot aan de slag.
+
+Ik zal eerst de app laten zien, en vervolgens zal ik mijn camera openen om te laten zien wat Pepper doet bij het gebruiken van de verschillende features.
+
+Er zijn in totaal vijf schermen. Drie tabs voor praten, bewegen en dansjes doen, een pop up voor het maken van een verbinding en een fullscreen scherm met joysticks, waarmee je de robot kan laten bewegen.
+
+Er is momenteel nog wel een kleine setup nodig, dat gaat zo. Eerst log je in op de robot met ssh. Dan zet je de python server, genaamd "server.py" aan. Zorg ook dat je telefoon met hetzelfde wifi-netwerk is verbonden als de robot.
+
+Als ik nu op dit icoontje druk, verschijnt het verbindings scherm. In dit dropdown menu komen alle mogelijke verbindingen te staan. Kies Pepper en druk op connect. De robot zal nu "connected" zeggen. Als ik nu disconnect, zal de robot "disconnected" zeggen. 
+
+Hier kan ik dingen typen, die de robot dan zal uitspreken, bijvoorbeeld "Hello!". Dan druk ik op "talk" en spreekt de robot het uit. Er zijn twee opties voor het spreken, volume en animated speech. Volume lijkt me duidelijk, dat verandert het volume van het uitspreken. Als de animated speech knop aan staat, zal Pepper handgebaren maken bij het spreken. 
+
+Dan het bewegen. Hier zijn drie opties, "wake up" maakt de robot wakker, Pepper zal dan even strekken. Autonomous life zat autonomous life aan. Dit is een modus waarin pepper gezichten zal volgen, zal reageren op vragen en reageert op aanraking. 

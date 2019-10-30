@@ -42,7 +42,8 @@ public class RobotSelectFragment extends DialogFragment implements View.OnClickL
         ArrayList<String> robotList = bundle.getStringArrayList("robots");
         if (robotList == null) {
             robotList = new ArrayList<>();
-            robotList.add(getString(R.string.default_robot_spinner_entry));
+//            robotList.add(getString(R.string.default_robot_spinner_entry));
+            robotList.add("Pepper");
         }
 
         // give the adapter a list of all available services to connect to
